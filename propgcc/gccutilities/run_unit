@@ -1,0 +1,2 @@
+#!/bin/sh
+/opt/parallax/bin/propeller-load -r -t -q main.elf

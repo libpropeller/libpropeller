@@ -1,0 +1,67 @@
+#!/bin/bash
+
+
+#To use, run the following
+# >$./run_all
+# >$./run_all -e          #load eeprom
+# >$./run_all -t baud     #start terminal with baud
+# >$./run_all -e -t baud  #load eeprom and start terminal
+
+# >$./run_all -tbaud -n #Don't output a clear screen at the beginning
+
+baud=""
+loadeeprom=""
+
+noclear=false
+
+
+#Parse parameters:
+while getopts ":ent:" opt; do
+	case $opt in
+		e)
+#			echo "Load EEPROM."
+			loadeeprom="-e"
+			;;
+		t)
+#			echo "Start Terminal with baud $OPTARG"
+			baud="-t$OPTARG"
+			;;
+		\?)
+			echo "Invalid option: -$OPTARG"
+			exit 1
+			;;
+		:)
+			echo "Option -$OPTARG requires an argument."
+			exit 1
+			;;
+		n)
+			noclear=true
+			;;
+	esac
+done
+
+if ! $noclear ; then
+	clear
+	echo clear
+fi
+
+make clean
+
+#Generate the Unity test file, if there is a *.test.cpp file.
+test=$( ls *.test.cpp)
+if [ "$test" != "" ]; then
+	ruby /home/clewis/consulting/red9/code/propgcc/gccutilities/generate_test_runner.rb
+	make Unit
+else
+	make
+fi
+
+#Print out the date FYI
+date
+#Download
+propeller-load -r $loadeeprom $baud main.elf
+
+#port=$(ls /dev/*USB* 2> /dev/null)
+#picocom --send-cmd "ascii-xfr -s -c 0" -b $baud $port
+
+
