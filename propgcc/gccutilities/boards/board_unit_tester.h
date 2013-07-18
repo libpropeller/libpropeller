@@ -1,5 +1,5 @@
-#ifndef __LIBPROPELLER_BOARD_H__
-#define __LIBPROPELLER_BOARD_H__
+#ifndef libpropeller_board_h_
+#define libpropeller_board_h_
 
 namespace Board{
 
@@ -11,6 +11,8 @@ namespace Board{
 	const int kPinMCP3208Select = 4;
 	
 	const int kPinSqw = 5;
+        
+        const int kPinDac = 6;
 	
 	const int kPinSDDo = 10;
 	const int kPinSDClk = 11;
@@ -29,4 +31,4 @@ namespace Board{
 	const int kPinUsbRx = 31;
 }
 
-#endif // __LIBPROPELLER_BOARD_H__
+#endif // libpropeller_board_h_

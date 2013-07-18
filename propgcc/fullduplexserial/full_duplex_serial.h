@@ -1,5 +1,5 @@
-#ifndef libpropeller_full_duplex_serial__
-#define libpropeller_full_duplex_serial__
+#ifndef libpropeller_full_duplex_serial_h_
+#define libpropeller_full_duplex_serial_h_
 
 
 //Warning: To change the buffer size you must change it here and in the .S file
@@ -99,4 +99,4 @@ private:
     int CheckBuffer(void);
 };
 
-#endif // libpropeller_full_duplex_serial__
+#endif // libpropeller_full_duplex_serial_h_
