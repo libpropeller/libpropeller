@@ -52,7 +52,7 @@ public:
      */
     void Stop(void);
 
-    /** Get the most recent high pulse duration.
+    /** Get the most recent high pulse duration. Index starts at 0.
      * 
      * @param index The index (from low to high) of the desired pin (out of all 
      *          the monitored pins)
@@ -60,7 +60,7 @@ public:
      */
     int getHighTime(int index);
 
-    /** Get the most recent low pulse duration.
+    /** Get the most recent low pulse duration. Index starts at 0.
      * 
      * @param index The index (from low to high) of the desired pin (out of all 
      *          the monitored pins)

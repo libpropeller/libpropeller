@@ -34,6 +34,9 @@
  * 
  */
 
+#ifndef __libpropeller_pin_h_
+#define __libpropeller_pin_h_
+
 // Comment out one definition of INLINE.
 #define INLINE __attribute__((always_inline)) inline 
 //#define INLINE inline
@@ -42,11 +45,23 @@
 
 class Pin {
 public:
+    /** Create a null pin (pin with no effect).
+     * 
+     */
+    Pin();
+    
+    
     /** Create the pin instance.
      * 
      * @param pin the I/O pin number (0 through 31) to control.
      */
     Pin(int pin);
+    
+    /** Get the pin number [0..31]. Returns -1 if no pin.
+     * 
+     */
+    int getPin(void);
+    
 
     /** Set pin to output high.
      */
@@ -83,10 +98,21 @@ public:
 
 private:
     unsigned int pin_mask;
+    int pinNumber;
     void output();
 };
 
+
+INLINE Pin::Pin() : pin_mask(0){
+    pinNumber = -1;
+}
+
 INLINE Pin::Pin(int pin) : pin_mask(1 << pin) {
+    pinNumber = pin;
+}
+
+INLINE int Pin::getPin(void){
+    return pinNumber;
 }
 
 INLINE void Pin::high() {
@@ -123,3 +149,6 @@ INLINE int Pin::input() {
 INLINE void Pin::output() {
     DIRA |= pin_mask;
 }
+
+
+#endif // __libpropeller_pin_h_

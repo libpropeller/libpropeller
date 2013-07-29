@@ -37,7 +37,7 @@ INCLUDE = -I${UNITYPATH} -I${GCCUTILITIESPATH} -I${BOARDCONFIGURATIONPATH} -I../
 
 
 
-DEBUGFLAGS = -Wall #-Wa,-alh,-L#-pedantic #-fstack-usage #-save-temps #-ftime-report -fmem-report #-Q
+DEBUGFLAGS = -Wall -fverbose-asm #-Wa,-alhm,-L#-pedantic #-fstack-usage #-save-temps #-ftime-report -fmem-report #-Q
 
 CXX = /opt/parallax/bin/propeller-elf-g++
 CLD = propeller-elf-ld
@@ -45,10 +45,10 @@ CLD = propeller-elf-ld
 
 OPTIMIZEFLAGS = -Os -fno-exceptions -ffunction-sections -fdata-sections -fno-rtti -m32bit-doubles -mfcache -fpermissive
 CXXFLAGS = -m${MODEL} ${INCLUDE} ${DEBUGFLAGS} ${DEFINEFLAGS} ${OPTIMIZEFLAGS} -std=gnu++0x -fno-strict-aliasing 
-CLDFLAGS = -Wl,--gc-sections #-Wl,--print-gc-sections #-Wl,--verbose #-Wl,--script=${GCCUTILITIESPATH}main.ld 
+CLDFLAGS = #-Wl,--gc-sections -Wl,--print-gc-sections #-Wl,--verbose #-Wl,--script=${GCCUTILITIESPATH}main.ld 
 
 Debug:
-	${CXX} ${CXXFLAGS} ${CLDFLAGS} -o main.elf ${SRCS}
+	${CXX} ${CXXFLAGS} ${CLDFLAGS} -o main.elf ${SRCS} 
 	
 Unit:
 	ruby ${ROOT}gccutilities/generate_test_runner.rb

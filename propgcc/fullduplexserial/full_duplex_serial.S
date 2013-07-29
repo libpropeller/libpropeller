@@ -2,6 +2,8 @@
 #define buffersize 256
 #define buffermask (buffersize - 1)
 
+#define Local 523052
+
                 .section .full_duplex_serial.cog, "ax"
                 .global FullDuplexSerial_Entry
 		.compress off
@@ -16,26 +18,26 @@ FullDuplexSerial_Entry
 
 ..start
 		.org	0
-		mov	T1, PAR                 //'get structure address
-		add	T1, #(4 << 2)           //'skip past heads and tails
+		mov	T1Local, PAR                 //'get structure address
+		add	T1Local, #(4 << 2)           //'skip past heads and tails
 
-		rdlong	T2, T1                  //'get rx_pin
+		rdlong	T2Local, T1Local                  //'get rx_pin
 		mov	Rxmask, #1
-		shl	Rxmask, T2
+		shl	Rxmask, T2Local
 
-		add	T1, #4                  //'get tx_pin
-		rdlong	T2, T1
+		add	T1Local, #4                  //'get tx_pin
+		rdlong	T2Local, T1Local
 		mov	Txmask, #1
-		shl	Txmask, T2
+		shl	Txmask, T2Local
 
-		add	T1, #4                  //'get rxtx_mode
-		rdlong	Rxtxmode, T1
+		add	T1Local, #4                  //'get rxtx_mode
+		rdlong	Rxtxmode, T1Local
 
-		add	T1, #4                  //'get bit_ticks
-		rdlong	Bitticks, T1
+		add	T1Local, #4                  //'get bit_ticks
+		rdlong	Bitticks, T1Local
 
-		add	T1, #4                  //'get buffer_ptr
-		rdlong	Rxbuff, T1
+		add	T1Local, #4                  //'get buffer_ptr
+		rdlong	Rxbuff, T1Local
 		mov	Txbuff, Rxbuff
 		add	Txbuff, #Bufsiz
 
@@ -64,9 +66,9 @@ Receive.bit
 Receive.wait
 		jmpret	Rxcode, Txcode          //'run a chuck of transmit code, then return
 
-		mov	T1, Rxcnt               //'check if bit receive period done
-		sub	T1, CNT
-		cmps	T1, #0	wc
+		mov	T1Local, Rxcnt               //'check if bit receive period done
+		sub	T1Local, CNT
+		cmps	T1Local, #0	wc
 	if_nc 	jmp	#Receive.wait
 
 		test	Rxmask, INA	wc      //'receive bit on rx pin
@@ -78,24 +80,24 @@ Receive.wait
 		test	Rxtxmode, #1	wz      //'if rx inverted, invert byte
 	if_nz 	xor	Rxdata, #$ff
 
-		rdlong	T2, PAR                 //'save received byte and inc head
-		add	T2, Rxbuff
-		wrbyte	Rxdata, T2
-		sub	T2, Rxbuff
-		add	T2, #1
-		and	T2, #Bufmsk
-		wrlong	T2, PAR
+		rdlong	T2Local, PAR                 //'save received byte and inc head
+		add	T2Local, Rxbuff
+		wrbyte	Rxdata, T2Local
+		sub	T2Local, Rxbuff
+		add	T2Local, #1
+		and	T2Local, #Bufmsk
+		wrlong	T2Local, PAR
 
 		jmp	#Receive                //'byte done, receive next byte
 Transmit
 		jmpret	Txcode, Rxcode          //'run a chunk of receive code, then return
 
-		mov	T1, PAR                 //'check for head <> tail
-		add	T1, #(2 << 2)
-		rdlong	T2, T1
-		add	T1, #(1 << 2)
-		rdlong	T3, T1
-		cmp	T2, T3	wz
+		mov	T1Local, PAR                 //'check for head <> tail
+		add	T1Local, #(2 << 2)
+		rdlong	T2Local, T1Local
+		add	T1Local, #(1 << 2)
+		rdlong	T3, T1Local
+		cmp	T2Local, T3	wz
 	if_z 	jmp	#Transmit
 
 		add	T3, Txbuff              //'get byte and inc tail
@@ -103,7 +105,7 @@ Transmit
 		sub	T3, Txbuff
 		add	T3, #1
 		and	T3, #Bufmsk
-		wrlong	T3, T1
+		wrlong	T3, T1Local
 
 		or	Txdata, #$100           //'ready byte to transmit
 		shl	Txdata, #2
@@ -123,9 +125,9 @@ Transmit.bit
 Transmit.wait
 		jmpret	Txcode, Rxcode          //'run a chunk of receive code, then return
 
-		mov	T1, Txcnt               //'check if bit transmit period done
-		sub	T1, CNT
-		cmps	T1, #0	wc
+		mov	T1Local, Txcnt               //'check if bit transmit period done
+		sub	T1Local, CNT
+		cmps	T1Local, #0	wc
 	if_nc 	jmp	#Transmit.wait
 
 		djnz	Txbits, #Transmit.bit   //'another bit to transmit?
@@ -137,8 +139,8 @@ Transmit.wait
 //
 // Unitialized Data
 //
-T1          .res	1
-T2          .res	1
+T1Local          .res	1
+T2Local          .res	1
 T3          .res	1
 Rxtxmode    .res	1
 Bitticks    .res	1
