@@ -55,7 +55,7 @@ int32_t quadrature_encoder::Start(int32_t Startpin, int32_t Numenc, int32_t Numd
   
   Stop();
  
-  Cog = cognew(_load_start_quadrature_encoder_cog, Pos) + 1;
+  Cog = cognew(_load_start_quadrature_encoder_cog, &Pos) + 1;
   
   
   /*

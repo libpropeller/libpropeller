@@ -2,17 +2,15 @@
                 .global QuadratureEncoder_Entry
                 .compress off
 
-                        
+// Had to change the relative addressing of some things from long to byte address                        
                         
 
 QuadratureEncoder_Entry 
 ..start
 		.org	0
                         
-                        or dira, #1
-                        or outa, #1
-                        /*
                 mov T1, par
+                rdlong Pos, T1
                 add T1, #4
                 rdlong Pin, T1
                 add T1, #4
@@ -25,16 +23,16 @@ QuadratureEncoder
 		mov	Idx, Totenc
 QuadratureEncoder.iclear
 		mov	0, #0
-		add	Iposaddr, #1
+		add	Iposaddr, #4
 		movd	QuadratureEncoder.iclear, Iposaddr
 		djnz	Idx, #QuadratureEncoder.iclear
 		mov	St2, INA
 		shr	St2, Pin
 QuadratureEncoder.sample
 		mov	Iposaddr, #((Intpos-..start)/4)
-		movd	(QuadratureEncoder.ipos + 0), Iposaddr
-		movd	(QuadratureEncoder.ipos + 1), Iposaddr
-		mov	Mposaddr, PAR
+		movd	(QuadratureEncoder.ipos), Iposaddr
+		movd	(QuadratureEncoder.ipos + 4), Iposaddr
+		mov	Mposaddr, Pos
 		mov	St1, St2
 		mov	T1, St2
 		shl	T1, #1
@@ -61,10 +59,11 @@ QuadratureEncoder.updatepos
 		sar	Diff, #$1e
 QuadratureEncoder.ipos
 		add	0, Diff
+QuadratureEncoder.ipos2
 		wrlong	0, Mposaddr
-		add	Iposaddr, #1
-		movd	(QuadratureEncoder.ipos + 0), Iposaddr
-		movd	(QuadratureEncoder.ipos + 1), Iposaddr
+		add	Iposaddr, #4
+		movd	(QuadratureEncoder.ipos), Iposaddr
+		movd	(QuadratureEncoder.ipos2), Iposaddr
 		add	Mposaddr, #4
 QuadratureEncoder.next
 		djnz	Idx, #QuadratureEncoder.updatepos
@@ -75,6 +74,7 @@ Bmask
 		.long	$aaaaaaaa
 Msb
 		.long	$80000000
+Pos             .res 1                        
 Pin
 		.res	1
 Totenc
@@ -96,6 +96,6 @@ Iposaddr
 Mposaddr
 		.res	1
 Intpos
-		.res	$10*/
+		.res	$10
                         
                 .compress default

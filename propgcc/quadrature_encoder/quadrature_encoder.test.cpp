@@ -12,7 +12,7 @@ int data[10];
 
 void setUp(void){
     sut = new quadrature_encoder();
-    printf("Started in cog: %i", sut->Start(9, 1, 1, (int32_t)&data));
+    printf("Started in cog: %i", sut->Start(9, 2, 2, (int32_t)&data));
     waitcnt(CLKFREQ/10 + CNT);
 }
 
@@ -25,7 +25,7 @@ void tearDown(void){
 
 void test_Empty(void){
     while(true){
-        printf("\nPosition: %i", data[0]);
+        printf("\nPosition: %i", data[1]);
         waitcnt(CLKFREQ/10 + CNT);
     }
 }
