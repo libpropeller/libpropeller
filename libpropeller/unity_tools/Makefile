@@ -28,10 +28,10 @@ endif
 SRCS=*.cpp $(wildcard *.S) #$(wildcard *.cpp) $(wildcard *.S)
 OBJS=$(subst .cpp,.o,$(SRCS))
 
-UNITYPATH = ${ROOT}unity_tools/
-BOARDCONFIGURATIONPATH = ${ROOT}board/
+UNITYPATH = ${ROOT}libpropeller/unity_tools/
+BOARDCONFIGURATIONPATH = ${ROOT}libpropeller/board/
 
-INCLUDE = -I${UNITYPATH} -I${BOARDCONFIGURATIONPATH} -I../ -I ../../
+INCLUDE = -I${UNITYPATH} -I${BOARDCONFIGURATIONPATH} -I../ -I ../../ -I${ROOT}
 
 #-Wa,-alh,-L  == output to STDOUT the generated assembly, with C interspersed
 
@@ -51,7 +51,7 @@ CXXFLAGS = -m${MODEL} ${INCLUDE} ${DEBUGFLAGS} ${DEFINEFLAGS} ${OPTIMIZEFLAGS} $
 CLDFLAGS = -Wl,--gc-sections #-Wl,--print-gc-sections #-Wl,--verbose #-Wl,--script=${GCCUTILITIESPATH}main.ld 
 
 Unit:
-	ruby ${ROOT}unity_tools/generate_test_runner.rb
+	ruby ${UNITYPATH}generate_test_runner.rb
 	${CXX} ${CXXFLAGS} ${CLDFLAGS} -o main.elf -D UNIT_TEST ${SRCS} ${UNITYPATH}unity.cpp
 	rm -f *.generate.*
 

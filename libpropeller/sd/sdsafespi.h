@@ -1,7 +1,8 @@
 
-#ifndef LIBREDNINE_SDSAFESPI_H_
-#define LIBREDNINE_SDSAFESPI_H_
+#ifndef LIBPROPELLER_SDSAFESPI_H_
+#define LIBPROPELLER_SDSAFESPI_H_
 
+#include <propeller.h>
 
 #define YIELD() __asm__ volatile( "" ::: "memory" )
 
@@ -72,10 +73,10 @@ public:
 
     /**  Start a new cog with the SPI driver.
      * 
-     * @param Do
-     * @param Clk
-     * @param Di
-     * @param Cs
+     * @param pin_do
+     * @param pin_clk
+     * @param pin_di
+     * @param pin_cs
      * @return The card type constant.
      */
     int Start(const int pin_do, const int pin_clk,
@@ -597,4 +598,4 @@ private:
 
 };
 
-#endif // LIBREDNINE_SDSAFESPI_H_
+#endif // LIBPROPELLER_SDSAFESPI_H_

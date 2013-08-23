@@ -1,5 +1,5 @@
-#ifndef libpropeller_mcp3208_h__
-#define libpropeller_mcp3208_h__
+#ifndef LIBPROPELLER_MCP3208_H_
+#define LIBPROPELLER_MCP3208_H_
 
 #include <propeller.h>
 
@@ -144,4 +144,4 @@ private:
     }
 };
 
-#endif // libpropeller_mcp3208_h__
+#endif // LIBPROPELLER_MCP3208_H_

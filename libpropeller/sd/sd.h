@@ -46,8 +46,8 @@
  *       int   Get(char * Ubuf, char EndOfStringChar); 
  */
 
-#ifndef LIBREDNINE_SD_H_
-#define LIBREDNINE_SD_H_
+#ifndef LIBPROPELLER_SD_H_
+#define LIBPROPELLER_SD_H_
 
 #include <propeller.h>
 #include "librednine/sd/sdsafespi.h"
@@ -114,10 +114,10 @@ public:
 
     /** Mount a volume with explicit pin numbers. Does not require adjacent pins.
      * 
-     * @param DO  The SPI Data Out pin (ouput relative to Propeller).
-     * @param CLK The SPI Clock pin.
-     * @param DI  The SPI Data In pin (input relative to Propeller).
-     * @param CS  The Chip Select pin.
+     * @param pin_do  The SPI Data Out pin (ouput relative to Propeller).
+     * @param pin_clk The SPI Clock pin.
+     * @param pin_di  The SPI Data In pin (input relative to Propeller).
+     * @param pin_cs  The Chip Select pin.
      */
     void Mount(const int pin_do, const int pin_clk, const int pin_di, const int pin_cs) {
         if (file_date_time_ == 0) {
@@ -434,7 +434,7 @@ public:
 
     /** Write a single character to the file.
      * 
-     * @param    C The character to write.
+     * @param  C The character to write.
      * @return  0 if successful, a negative number if an error occurred.
      */
     int Put(const char C) {
@@ -460,9 +460,9 @@ public:
 
     /** Write bytes from buffer into the currently open file.
      * 
-     * @param The buffer to pull the data from. The buffer may be as large as 
+     * @param buffer The buffer to pull the data from. The buffer may be as large as 
      * you want.
-     * @param Count the number of bytes to write.
+     * @param byte_count the number of bytes to write.
      * @return the number of bytes successfully written, or a negative number 
      * if there was an error.
      */
@@ -604,12 +604,12 @@ public:
      * @warning parameter limits are not checked. Ie, a month of 13 will not 
      * generate an error.
      * 
-     * @param Year   The year   (range 1980 - 2106, all 4 digits!)
-     * @param Month  The month  (range 1-12)
-     * @param Day    The day    (range 1-31)
-     * @param Hour   The hour   (range 0-23)
-     * @param Minute The minute (range 0-59)
-     * @param Second The second (range 0-59)
+     * @param year   The year   (range 1980 - 2106, all 4 digits!)
+     * @param month  The month  (range 1-12)
+     * @param day    The day    (range 1-31)
+     * @param hour   The hour   (range 0-23)
+     * @param minute The minute (range 0-59)
+     * @param second The second (range 0-59)
      * @return the FAT16 date format (you can safely ignore the return in all 
      * cases, unless you want to test the correctness of the function).
      */
@@ -1143,4 +1143,4 @@ private:
 
 };
 
-#endif // LIBREDNINE_SD_H_
+#endif // LIBPROPELLER_SD_H_
