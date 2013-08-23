@@ -69,7 +69,7 @@ public:
      * 
      * For testing only!
      * 
-     * @param hz The frequency is deci-hz (hz * 10)
+     * @param deci_hz The frequency is deci-hz (hz * 10)
      * @return The number of clock cycles (ticks) per period.
      */
     static unsigned int GetTicksPerPeriod(const int deci_hz) {

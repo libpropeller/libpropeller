@@ -29,16 +29,17 @@ public:
     /**
     Create the MAX8819 object, turn the power on, and turn off charging.
 
-    @warning pmic->SetCharge(Max8819::HIGH); @TODO(SRLM): There is some sort of bug where this *must* be in the code, otherwise it causes a reset.
+    @warning pmic->SetCharge(Max8819::HIGH); 
+    @TODO(SRLM): There is some sort of bug where this *must* be in the code, otherwise it causes a reset.
 
     The pins from the Propeller to the MAX8819 can be connected directly: no need
     for current limiting resistors.
 
     @param CENpin   The pin connected to Charge Enable on the MAX8819
-    @param CHGPin   The pin connected to (is) Charge(ing?) pin on the MAX8819
-    @param ENPin    The pin connected to Enable123 pin on the MAX8819
-    @param DLIM1Pin The pin connected to DLIM1 pin on the MAX8819
-    @param DLIM2Pin The pin connected to DLIM2 pin on the MAX8819
+    @param CHGpin   The pin connected to (is) Charge(ing?) pin on the MAX8819
+    @param ENpin    The pin connected to Enable123 pin on the MAX8819
+    @param DLIM1pin The pin connected to DLIM1 pin on the MAX8819
+    @param DLIM2pin The pin connected to DLIM2 pin on the MAX8819
 
      */
     void Start(int CENpin, int CHGpin, int ENpin, int DLIM1pin, int DLIM2pin);

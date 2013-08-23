@@ -1,7 +1,7 @@
-#ifndef LIBREDNINE_GPSPARSER_H_
-#define LIBREDNINE_GPSPARSER_H_
+#ifndef LIBPROPELLER_GPSPARSER_H_
+#define LIBPROPELLER_GPSPARSER_H_
 
-#include "librednine/serial/serial.h"
+#include "libpropeller/serial/serial.h"
 
 /** Receives and parses NMEA0183 GPS streams into C strings.
  * 
@@ -18,14 +18,14 @@ public:
 
     /** Create the parser and launch a new cog.
      * 
-     * @param rxPin the serial pin to receive data from the GPS.
-     * @param txPin the pin to transmit data to the GPS. If not used, set to -1.
+     * @param rx_pin the serial pin to receive data from the GPS.
+     * @param tx_pin the pin to transmit data to the GPS. If not used, set to -1.
      * @param baud  the baud rate to use for tranmission and receiving.
      */
-    bool Start(const int rxPin, const int txPin, const int baud) {
+    bool Start(const int rx_pin, const int tx_pin, const int baud) {
         gps_serial_.Stop();
         next_character_position_ = 0;
-        gps_serial_.Start(rxPin, txPin, baud);
+        gps_serial_.Start(rx_pin, tx_pin, baud);
 
         recording_sentence_ = false;
         return true;
@@ -40,8 +40,8 @@ public:
     /** Gets a NMEA string. Note that the returned string address is valid (will 
      * not be overwritten) until the next time GetStr() is called.
      * 
-     * The returned string includes all characters from the GPS except for the 
-     * \r and \n (<CR><LF>) at the end.
+     * The returned string includes all characters from the GPS except for
+     *  the \r and \n (<CR><LF>) at the end.
      * 
      * Partial sentences may be thrown away (if a sentence is not being 
      * currently recorded).
@@ -62,7 +62,7 @@ public:
      * string). Otherwise, part of the string will be stored in one buffer, and 
      * part of the string will be stored in the other.
      * 
-     * @param s The buffer to use. Must be at least 85 characters long (the NMEA string length).
+     * @param string The buffer to use. Must be at least 85 characters long (the NMEA string length).
      * @param maxBytes The maximum number of bytes to record in this string. Defaults to maximum NMEA sentence length.
      * @returns NULL pointer if no string, null terminated string otherwise (in buffer @a s).
      */
@@ -136,4 +136,4 @@ public:
 
 
 
-#endif // LIBREDNINE_GPSPARSER_H_
+#endif // LIBPROPELLER_GPSPARSER_H_

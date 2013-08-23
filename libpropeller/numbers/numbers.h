@@ -79,7 +79,7 @@ public:
      * @warning Converted integers must be 32 bit integers. This range is not
      *          checked. 
      *
-     * @param n  The 32 bit number to convert.
+     * @param number  The 32 bit number to convert.
      * @param num_digits The number of Hex digits to print.
      * @param result_string  The address to store the string representation. Defaults to the internal buffer if NULL.
      * @returns  The starting address of the string pointer.
