@@ -44,19 +44,19 @@ public:
      * 
      */
     Pin();
-    
-    
+
+
     /** Create the pin instance.
      * 
      * @param pin the I/O pin number (0 through 31) to control.
      */
     Pin(int pin);
-    
+
     /** Get the pin number [0..31]. Returns -1 if no pin.
      * 
      */
     int getPin(void);
-    
+
 
     /** Set pin to output high.
      */
@@ -79,7 +79,7 @@ public:
 
     /** Output a value on the pin.
      * 
-     * @param setting true to output high, false to output low.
+     * @param setting 1 to output high, 0 to output low.
      */
     void output(int setting);
 
@@ -91,14 +91,59 @@ public:
      */
     bool isOutput(void);
 
+    
+
+    /** Output a PWM wave on a pin.
+     * 
+     * @warning You MUST stop the PWM by calling this function with a frequency
+     * of 0!. Otherwise the Propeller counters will continue to output the PWM,
+     * even if this class has been garbage collected and destroyed.
+     * 
+     * @warning This function uses the Propeller counters. There are only two
+     * per cog, so that means that you can have up to two PWM waves and that's
+     * it! In addition, nothing else can use the counters.
+     * 
+     * @param decihz       The frequency to PWM at. A parameter of 0 disables the PWM.
+     * @param useCTRA      Explicitly specify which counter to use. True for CTRA, false for CTRB
+     * @param alternatePin Specify a pin to have an alternating PWM on. That pin will be the logical inverse of whatever this pin is.
+     */
+    void pwm(const int decihz, const bool useCTRA = true, Pin * alternatePin = NULL) {
+        
+        low();
+        
+        const int frq = (decihz * (((1 << 30) / CLKFREQ) << 2)) / 10;
+        int ctr = (0b00101000 << 23) + pinNumber;
+        
+        if(alternatePin != NULL){
+            ctr +=  alternatePin->getPin() << 9;
+            alternatePin->setOutput();
+            alternatePin->low();
+        }
+        
+        
+        if(decihz == 0){
+            ctr = 0;
+        }
+        
+        if (useCTRA) {
+            FRQA = frq;
+            CTRA = ctr;
+        } else {
+            FRQB = frq;
+            CTRB = ctr;
+        }
+        
+        setOutput();
+    }
+
+
 private:
     unsigned int pin_mask;
     int pinNumber;
     void setOutput();
 };
 
-
-INLINE Pin::Pin() : pin_mask(0){
+INLINE Pin::Pin() : pin_mask(0) {
     pinNumber = -1;
 }
 
@@ -106,7 +151,7 @@ INLINE Pin::Pin(int pin) : pin_mask(1 << pin) {
     pinNumber = pin;
 }
 
-INLINE int Pin::getPin(void){
+INLINE int Pin::getPin(void) {
     return pinNumber;
 }
 
@@ -147,3 +192,4 @@ INLINE void Pin::setOutput() {
 
 
 #endif // __libpropeller_pin_h_
+
