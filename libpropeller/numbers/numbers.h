@@ -1,5 +1,5 @@
-#ifndef LIBREDNINE_NUMBERS_H_
-#define LIBREDNINE_NUMBERS_H_
+#ifndef LIBPROPELLER_NUMBERS_H_
+#define LIBPROPELLER_NUMBERS_H_
 
 #include <string.h>
 
@@ -245,4 +245,4 @@ private:
     static char internalBuffer[];
 };
 
-#endif // LIBREDNINE_NUMBERS_H_
+#endif // LIBPROPELLER_NUMBERS_H_

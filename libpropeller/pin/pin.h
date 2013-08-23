@@ -1,5 +1,5 @@
-#ifndef __libpropeller_pin_h_
-#define __libpropeller_pin_h_
+#ifndef LIBPROPELLER_PIN_H_
+#define LIBPROPELLER_PIN_H_
 
 // Comment out one definition of INLINE.
 #define INLINE __attribute__((always_inline)) inline 
@@ -191,5 +191,5 @@ INLINE void Pin::setOutput() {
 }
 
 
-#endif // __libpropeller_pin_h_
+#endif // LIBPROPELLER_PIN_H_
 

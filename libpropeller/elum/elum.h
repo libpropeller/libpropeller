@@ -3,8 +3,8 @@
 #include <propeller.h>
 
 
-#ifndef SRLM_PROPGCC_ELUM_H_
-#define SRLM_PROPGCC_ELUM_H_
+#ifndef LIBPROPELLER_ELUM_H_
+#define LIBPROPELLER_ELUM_H_
 
 /** Elum class to allow access to single Elums
 

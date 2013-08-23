@@ -1,7 +1,7 @@
 // Copyright 2013 SRLM and Red9
 #include <propeller.h>
 #include "unity.h"
-#include "i2c.h"
+#include "libpropeller/i2c/i2c.h"
 
 const int kSDAPin = 1;
 const int kSCLPin = 0;
@@ -14,7 +14,7 @@ static const unsigned char Magn = 0b00111100;
 static const unsigned char BARO = 0b11101110;
 static const unsigned char Fuel = 0b01101100;
 
-i2c sut;
+I2C sut;
 
 int registerAddress = 4;
 int randomAddress = 0;

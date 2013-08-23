@@ -1,7 +1,7 @@
-#ifndef LIBREDNINE_EEPROM_H_
-#define LIBREDNINE_EEPROM_H_
+#ifndef LIBPROPELLER_EEPROM_H_
+#define LIBPROPELLER_EEPROM_H_
 
-#include "librednine/i2c/i2c_base.h"
+#include "libpropeller/i2c/i2c_base.h"
 
 /** Access I2C EEPROMs.
  * 
@@ -203,4 +203,4 @@ private:
 
 };
 
-#endif // LIBREDNINE_EEPROM_H_
+#endif // LIBPROPELLER_EEPROM_H_

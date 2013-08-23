@@ -1,5 +1,5 @@
-#ifndef LIBREDNINE_SCHEDULER_H_
-#define LIBREDNINE_SCHEDULER_H_
+#ifndef LIBPROPELLER_SCHEDULER_H_
+#define LIBPROPELLER_SCHEDULER_H_
 
 
 #ifndef UNIT_TEST
@@ -82,4 +82,4 @@ private:
     unsigned int period_ticks_;
 };
 
-#endif // LIBREDNINE_SCHEDULER_H_
+#endif // LIBPROPELLER_SCHEDULER_H_

@@ -1,3 +1,10 @@
+#ifndef LIBPROPELLER_MAX8819_H_
+#define LIBPROPELLER_MAX8819_H_
+
+#include <stdint.h>
+#include <propeller.h>
+
+
 /** Max8819.h - Max8819 class to allow access to single pins
 
 The low level interface code is based on Pins.h from David Michael Betz.
@@ -11,12 +18,6 @@ page 18 of datasheet) when CHG outputs a 2Hz square wave.
 @date 1-1-2013
 
  */
-#ifndef __SRLM_PROPGCC_MAX8819_H__
-#define __SRLM_PROPGCC_MAX8819_H__
-
-#include <stdint.h>
-#include <propeller.h>
-
 class Max8819 {
 private:
     uint32_t cen_mask;
@@ -162,4 +163,4 @@ inline void Max8819::SetCharge(int rate) {
     }
 }
 
-#endif // __SRLM_PROPGCC_MAX8819_H__
+#endif // LIBPROPELLER_MAX8819_H_

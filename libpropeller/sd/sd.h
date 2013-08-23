@@ -1,3 +1,17 @@
+#ifndef LIBPROPELLER_SD_H_
+#define LIBPROPELLER_SD_H_
+
+#include <propeller.h>
+#include "libpropeller/sd/sdsafespi.h"
+
+
+#define RET_IF_ERROR_NULL if(HasError()){return NULL;}
+#define RET_IF_ERROR if(HasError()){return;}
+#define THROW_NULL(value) {SetErrorCode((value)); return NULL;}
+//#define THROW_FALSE(value) {SetErrorCode((value)); return false;}
+#define THROW(value) {SetErrorCode((value)); return;}
+
+
 /** FAT16/32 SD card interface.
  * 
  * This class is based on the Spin version of FSRW 2.6 by Rokicki and Lonesock. Thanks!
@@ -45,20 +59,6 @@
  * Write a function that gets a string:
  *       int   Get(char * Ubuf, char EndOfStringChar); 
  */
-
-#ifndef LIBPROPELLER_SD_H_
-#define LIBPROPELLER_SD_H_
-
-#include <propeller.h>
-#include "librednine/sd/sdsafespi.h"
-
-
-#define RET_IF_ERROR_NULL if(HasError()){return NULL;}
-#define RET_IF_ERROR if(HasError()){return;}
-#define THROW_NULL(value) {SetErrorCode((value)); return NULL;}
-//#define THROW_FALSE(value) {SetErrorCode((value)); return false;}
-#define THROW(value) {SetErrorCode((value)); return;}
-
 class SD {
 public:
     static const int kNoError = SDSafeSPI::kNoError;

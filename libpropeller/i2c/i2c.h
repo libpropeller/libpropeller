@@ -1,7 +1,7 @@
 
 
-#ifndef LIBREDNINE_I2C_H_
-#define LIBREDNINE_I2C_H_
+#ifndef LIBPROPELLER_I2C_H_
+#define LIBPROPELLER_I2C_H_
 
 #include <stdint.h>
 
@@ -274,4 +274,4 @@ public:
 
 };
 
-#endif // LIBREDNINE_I2C_H_
+#endif // LIBPROPELLER_I2C_H_

@@ -1,9 +1,9 @@
-#ifndef LIBREDNINE_SERIAL_H_
-#define LIBREDNINE_SERIAL_H_
+#ifndef LIBPROPELLER_SERIAL_H_
+#define LIBPROPELLER_SERIAL_H_
 
 #include <cstdarg>
 #include <propeller.h>
-#include "librednine/numbers/numbers.h"
+#include "libpropeller/numbers/numbers.h"
 
 extern char _load_start_serial_cog[];
 
@@ -529,4 +529,4 @@ private:
 //	return buffer_bytes;
 //}
 
-#endif // LIBREDNINE_SERIAL_H_
+#endif // LIBPROPELLER_SERIAL_H_

@@ -1,2 +1,18 @@
-#!/bin/sh
-/opt/parallax/bin/propeller-load -r -t -q main.elf
+#!/usr/bin/python
+import os
+import sys
+import argparse
+from subprocess import call
+
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument("-m", "--make", action="store_true", help="Make clean and make before loading.")
+args = parser.parse_args()
+
+if args.make:
+	os.system("make clean")
+	os.system("make")
+
+sys.exit(os.system("/opt/parallax/bin/propeller-load -r -q -t115200 main.elf"))
+

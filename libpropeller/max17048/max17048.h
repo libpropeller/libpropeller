@@ -1,8 +1,8 @@
 
-#ifndef LIBREDNINE_MAX17048_H_
-#define LIBREDNINE_MAX17048_H_
+#ifndef LIBPROPELLER_MAX17048_H_
+#define LIBPROPELLER_MAX17048_H_
 
-#include "librednine/i2c/i2c.h"
+#include "libpropeller/i2c/i2c.h"
 
 /**Interface to the MAX17048 Fuel Chip
  * 
@@ -120,4 +120,4 @@ private:
 };
 
 
-#endif // LIBREDNINE_MAX17048_H_
+#endif // LIBPROPELLER_MAX17048_H_

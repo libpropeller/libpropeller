@@ -1,9 +1,9 @@
 #include <string.h>
 #include "unity.h"
-#include "c++-alloc.h"
+#include "libpropeller/c++allocate/c++allocate.h"
 
-#include "librednine/serial/serial.h"
-#include "gpsparser.h"
+#include "libpropeller/serial/serial.h"
+#include "libpropeller/gpsparser/gpsparser.h"
 
 
 // TODO(SRLM) Get rid of the hardcoded test pins.

@@ -1,7 +1,7 @@
 #include "unity.h"
 #include "c++-alloc.h"
-#include "librednine/i2c/i2c.h"
-#include "librednine/max17048/max17048.h"
+#include "libpropeller/i2c/i2c.h"
+#include "libpropeller/max17048/max17048.h"
 
 MAX17048 * sut;
 I2C * bus;

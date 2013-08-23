@@ -1,8 +1,8 @@
-#ifndef LIBREDNINE_PCF8523_H_
-#define LIBREDNINE_PCF8523_H_
+#ifndef LIBPROPELLER_PCF8523_H_
+#define LIBPROPELLER_PCF8523_H_
 
 #include <propeller.h>
-#include "librednine/i2c/i2c.h"
+#include "libpropeller/i2c/i2c.h"
 
 /** Interface to the PCF8523 Real Time Clock (RTC).
  * 
@@ -224,4 +224,4 @@ public:
 };
 
 
-#endif // LIBREDNINE_PCF8523_H_
+#endif // LIBPROPELLER_PCF8523_H_

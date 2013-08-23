@@ -46,7 +46,7 @@ public:
      * initialization.
      * 
      * @param newbus The I2C bus to use.
-     * @param AddressLSB The least significant byte of the I2C address. Use the enum constants.
+     * @param address The least significant byte of the I2C address. Use the enum constants.
      */
     bool Init(I2C * newbus, const AddressLSB address = LSB_0) {
 

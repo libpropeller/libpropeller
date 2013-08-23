@@ -1,5 +1,5 @@
-#ifndef LIBREDNINE_I2C_BASE_H_
-#define LIBREDNINE_I2C_BASE_H_
+#ifndef LIBPROPELLER_I2C_BASE_H_
+#define LIBPROPELLER_I2C_BASE_H_
 
 #include <propeller.h>
 
@@ -210,4 +210,4 @@ private:
 
 
 
-#endif // LIBREDNINE_I2C_BASE_H_
+#endif // LIBPROPELLER_I2C_BASE_H_
