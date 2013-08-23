@@ -104,7 +104,9 @@ public:
 
     /**
     Set the LED color to flash.
-     @example 
+    
+    For example:
+
         elum.Flash(Elum::GREEN, 1000, 750); //Set Green to turn on for 750ms, and off for 250ms
 
     @param color     Elum::RED or Elum::GREEN
