@@ -5,7 +5,7 @@
 
 #include <stdint.h>
 
-#include "librednine/i2c/i2c_base.h"
+#include "libpropeller/i2c/i2c_base.h"
 
 /** A basic I2C driver.
  * 

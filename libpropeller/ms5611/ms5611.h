@@ -1,14 +1,14 @@
-#ifndef LIBREDNINE_MS5611_H_
-#define LIBREDNINE_MS5611_H_
+#ifndef LIBPROPELLER_MS5611_H_
+#define LIBPROPELLER_MS5611_H_
 
 #include <propeller.h>
-#include "librednine/i2c/i2c.h"
+#include "libpropeller/i2c/i2c.h"
 
 #ifdef UNIT_TEST
 #undef UNIT_TEST
 #define UNIT_TEST_
 #endif
-#include "librednine/stopwatch/stopwatch.h"
+#include "libpropeller/stopwatch/stopwatch.h"
 #ifdef UNIT_TEST_
 #define UNIT_TEST
 #endif
@@ -323,4 +323,4 @@ public:
 
 };
 
-#endif // LIBREDNINE_MS5611_H_
+#endif // LIBPROPELLER_MS5611_H_

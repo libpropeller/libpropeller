@@ -2,7 +2,7 @@
 
 #include "unity.h"
 
-#include "librednine/ms5611/ms5611.h"
+#include "libpropeller/ms5611/ms5611.h"
 #include "c++-alloc.h"
 
 //TODO(SRLM): Get rid of the hardcoded pins.
