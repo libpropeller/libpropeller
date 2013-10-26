@@ -34,7 +34,8 @@ extern char _load_start_pulsewidthreader_cog[];
  *      1|  10
  *      2|  21
  * 
- * @author SRLM (srlm@srlmproductions.com)
+ * Copyright (c) 2013 Kenneth Bedolla  (libpropeller@kennethbedolla.com)
+ * 
  * @todo(SRLM): Make members of this class static (since it monitors all the pins...)
  * @todo(SRLM): Get rid of the terrible "index" system and create a more
  *              intuitive start.

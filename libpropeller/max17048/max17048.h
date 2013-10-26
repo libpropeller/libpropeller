@@ -61,7 +61,7 @@ public:
 
     /** Use the MAX17048 internal ADC, and get the voltage
      * 
-     * @returns the current voltage in units of 1mv/LSb
+     * @returns the current voltage in units of 1mv/LSb (0.001v)
      */
     int GetVoltage(void) {
         int voltage = GetShort(kVCELL);
@@ -79,7 +79,7 @@ public:
      * 
      * @todo(SRLM): Figure out the sign issues with this.
      * 
-     * @returns the charge rate in units of 0.1%/hr. Note: Positive or negive for
+     * @returns the charge rate in units of 0.1%/hr. Note: Positive or negative for
      */
     int GetChargeRate(void) {
         //SRLM doesn't know if this is signed or not, but if it is then sign extend

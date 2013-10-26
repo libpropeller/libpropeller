@@ -22,7 +22,7 @@ extern char _load_start_mcp3208_cog[];
  * 
  * This object is based on MCP3208.spin v1.0 written by Chip Gracey. Thanks!
  * 
- * @author srlm (srlm@srlmproductions.com)
+ * Copyright (c) 2013 Kenneth Bedolla  (libpropeller@kennethbedolla.com)
  */
 class MCP3208 {
 public:

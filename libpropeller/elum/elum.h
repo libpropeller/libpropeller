@@ -23,8 +23,6 @@ on a different cog).
  * 
 Some parts based on Pins.h by David Michael Betz.
 Some parts based on an example by Tracey Allen.
-
-@author SRLM (srlm@srlmproductions.com)
  */
 class Elum {
 public:

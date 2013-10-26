@@ -25,10 +25,13 @@ public:
      * 
      * @param scl The I2C SCL pin. Defaults to the Propeller default SCL pin.
      * @param sda The I2C SDA pin. Defaults to the Propeller default SDA pin.
+     * @param frequency The frequency in hz to run the bus at.
      */
-    void Init(const int scl = 28, const int sda = 29) {
+    void Init(const int scl = 28, const int sda = 29, const int frequency = 400000) {
         scl_mask_ = 1 << scl;
         sda_mask_ = 1 << sda;
+        
+        SetFrequency(frequency);
 
         //Set pins to input
         I2C_FLOAT_SCL_HIGH;
@@ -39,7 +42,28 @@ public:
         OUTA &= ~scl_mask_;
         OUTA &= ~sda_mask_;
 
-        clock_delay_ = 100; //90;
+        
+    }
+    
+    /**
+     * @param frequency The frequency in hz to run the bus at.
+     */
+    void SetFrequency(const int frequency){
+        
+        
+    //Clock delay values (@80MHz system clock):
+    // 1600 == 25kHz
+    //  400 == 100kHz
+    //  100 == 400kHz
+    //   90 == 444kHz
+    //   32 == 1.25MHz
+        
+        
+        
+        //clock_delay_ = 100; //90;
+        
+        clock_delay_ = CLKFREQ/(2*frequency);
+        
     }
 
     /** Output a start condition on the I2C bus.
@@ -197,13 +221,6 @@ private:
     unsigned int scl_mask_;
     unsigned int sda_mask_;
 
-
-    //Clock delay values (@80MHz system clock):
-    // 1600 == 25kHz
-    //  400 == 100kHz
-    //  100 == 400kHz
-    //   90 == 444kHz
-    //   32 == 1.25MHz
     int clock_delay_;
 
 };

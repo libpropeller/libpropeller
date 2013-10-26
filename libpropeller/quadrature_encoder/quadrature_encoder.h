@@ -22,6 +22,8 @@ extern char _load_start_quadrature_encoder_cog[];
  * Therefore, you should chose your encoder, gearbox, and wheel combination to
  * match the precision that you need (distance per tick) while minimize the
  * total ticks per revolution.
+ * 
+ * Copyright (c) 2013 Kenneth Bedolla  (libpropeller@kennethbedolla.com)
  */
 
 class QuadratureEncoder {

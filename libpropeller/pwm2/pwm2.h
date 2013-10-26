@@ -17,6 +17,7 @@ extern char _load_start_pwm2_cog[];
  * 
  * @todo(SRLM): figure out the maximum frequency (as a function of clock speed)
  * 
+ * Copyright (c) 2013 Kenneth Bedolla  (libpropeller@kennethbedolla.com)
  * 
  */
 class PWM2 {

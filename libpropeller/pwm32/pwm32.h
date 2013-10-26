@@ -23,6 +23,7 @@ static int tmp__;
  * No external hardware beyond the PWM devices is needed. Works with H bridges,
  * LEDs, servos, and anything else that takes a repeating PWM signal.
  * 
+ * Copyright (c) 2013 Kenneth Bedolla  (libpropeller@kennethbedolla.com)
  */
 class PWM32 {
 public:

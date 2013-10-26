@@ -35,7 +35,7 @@ extern char _load_start_full_duplex_serial_cog[];
  * This object is derived from FullDuplexSerial.spin v1.2.1 by Chip Gracey, Jeff
  * Martin, and Daniel Harris. Thanks!
  * 
- * @author SRLM(srlm@srlrmproductions.com)
+ * Copyright (c) 2013 Kenneth Bedolla  (libpropeller@kennethbedolla.com)
  * 
  */
 

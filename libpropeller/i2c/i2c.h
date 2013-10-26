@@ -42,9 +42,10 @@ public:
      * 
      * @param scl The I2C SCL pin. Defaults to the Propeller default SCL pin.
      * @param sda The I2C SDA pin. Defaults to the Propeller default SDA pin.
+     * @param frequency The frequency in hz to run the bus at.
      */
-    void Init(const int scl = 28, const int sda = 29) {
-        base_.Init(scl, sda);
+    void Init(const int scl = 28, const int sda = 29, const int frequency = 400000) {
+        base_.Init(scl, sda, frequency);
     }
 
     /** Test for the Acknowledge of a device by sending start and the slave address.

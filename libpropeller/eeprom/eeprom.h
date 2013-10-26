@@ -11,8 +11,6 @@
  * 
  * This driver was written to work with the AT24C512C EEPROM from Atmel, but it
  * may work with other I2C EEPROMs.
- * 
- * @author SRLM
  */
 class EEPROM {
 public:
