@@ -46,7 +46,7 @@ CLD = propeller-elf-ld
 
 INLINEFLAGS = #-fno-default-inline
 
-OPTIMIZEFLAGS = -Os -fno-exceptions -ffunction-sections -fdata-sections -fno-rtti -m32bit-doubles -mfcache -fpermissive
+OPTIMIZEFLAGS = -pipe -Os -fno-exceptions -ffunction-sections -fdata-sections -fno-rtti -m32bit-doubles -mno-fcache -fpermissive
 CXXFLAGS = -m${MODEL} ${INCLUDE} ${DEBUGFLAGS} ${DEFINEFLAGS} ${OPTIMIZEFLAGS} ${INLINEFLAGS} -std=gnu++0x -fno-strict-aliasing 
 CLDFLAGS = -Wl,--gc-sections #-Wl,--print-gc-sections #-Wl,--verbose #-Wl,--script=${GCCUTILITIESPATH}main.ld 
 

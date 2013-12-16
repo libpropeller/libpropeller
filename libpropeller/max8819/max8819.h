@@ -115,7 +115,9 @@ void inline Max8819::Start(int CENpin, int CHGpin, int ENpin, int DLIM1pin, int 
     dlim2_mask = 1 << DLIM2pin;
 
 
-    On();
+    On(); // Default pin is off, so if we don't set it on before setting it to
+          // output it will output low, which will cause a reset (turn off 
+          // power rails).
 
     DIRA |= en_mask; // Set to output
     DIRA |= dlim1_mask; // Set to output

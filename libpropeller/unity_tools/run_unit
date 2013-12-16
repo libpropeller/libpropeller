@@ -14,5 +14,7 @@ if args.make:
 	os.system("make clean")
 	os.system("make")
 
-sys.exit(os.system("/opt/parallax/bin/propeller-load -r -q -t115200 main.elf"))
+
+os.system("propeller-elf-size main.elf")
+sys.exit(os.system("propeller-load -r -q -t115200 main.elf"))
 

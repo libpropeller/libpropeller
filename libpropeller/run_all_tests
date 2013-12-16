@@ -7,7 +7,8 @@ tests_run = []
 previous_line = ""
 failed_tests = False
 
-ignore_folders = ["board", "max8819", "elum", "c++allocate", "fullduplexserial", "quadrature_encoder", "unity_tools", "vnh2sp30"]
+ignore_folders = ["sd", "board", "max8819", "elum", "c++allocate", "fullduplexserial", "quadrature_encoder", \
+		"unity_tools", "vnh2sp30", "mtk3339", "streaminterface", "compile_tools"]
 
 folders = [d for d in os.listdir(os.getcwd()) if os.path.isdir(d)]
 
