@@ -196,7 +196,61 @@ public:
         char string [] = "abcdef";
         TEST_ASSERT_EQUAL_STRING("fedcba", Numbers::Reverse(string));
     }
-
+    
+    // -----------------------------------------------------------------------------
+    // ZeroPad
+    // -----------------------------------------------------------------------------
+    static void test_ZeroPadSimple(void){
+        char string[20] = "1234";
+        TEST_ASSERT_EQUAL_STRING("001234", Numbers::ZeroPad(string, 6));
+    }
+    
+    static void test_ZeroPadSingleDigit(void){
+        char string[20] = "1";
+        TEST_ASSERT_EQUAL_STRING("0001", Numbers::ZeroPad(string, 4));
+    }
+    
+    static void test_ZeroPadNoAdditionalPadding(void){
+        char string[20] = "1234";
+        TEST_ASSERT_EQUAL_STRING("1234", Numbers::ZeroPad(string, 3));
+    }
+    
+    static void test_ZeroPadZeroLength(void){
+        char string[20] = "1234";
+        TEST_ASSERT_EQUAL_STRING("1234", Numbers::ZeroPad(string, 0));
+    }
+    
+    static void test_ZeroPadNegativeLength(void){
+        char string[20] = "1234";
+        TEST_ASSERT_EQUAL_STRING("1234", Numbers::ZeroPad(string, -1));
+    }
+    
+    static void test_ZeroPadNegativeSign(void){
+        char string[20] = "-1234";
+        TEST_ASSERT_EQUAL_STRING("-001234", Numbers::ZeroPad(string, 6));
+    }
+    
+    static void test_ZeroPadPositiveSign(void){
+        char string[20] = "+1234";
+        TEST_ASSERT_EQUAL_STRING("+001234", Numbers::ZeroPad(string, 6));
+    }
+    
+    static void test_ZeroPadNegativeSignNoPadding(void){
+        char string[20] = "-1234";
+        TEST_ASSERT_EQUAL_STRING("-1234", Numbers::ZeroPad(string, 3));
+    }
+    
+    static void test_ZeroPadNegativeSignCountSign(void){
+        char string[20] = "-1234";
+        TEST_ASSERT_EQUAL_STRING("-01234", Numbers::ZeroPad(string, 6, true));
+    }
+    
+    
+    
+   
+    /*
+    
+    
     // -----------------------------------------------------------------------------
     // Assorted Tests
     // -----------------------------------------------------------------------------
@@ -334,7 +388,7 @@ public:
     static void test_HexDigits8(void) {
         TEST_ASSERT_EQUAL_INT(8, Numbers::HexDigits(0xFEDCBA98));
     }
-
+*/
 };
 
 

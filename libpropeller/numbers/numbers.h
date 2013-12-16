@@ -2,6 +2,7 @@
 #define LIBPROPELLER_NUMBERS_H_
 
 #include <string.h>
+#include <limits.h>
 
 /** Convert between numbers and the various string representations.
  * 
@@ -44,6 +45,42 @@ public:
         return result_string;
     }
 
+    /** Pad a number string with '0' to achieve the minimum number of digits.
+     * 
+     * @param resultString The input string to modify, and the destination of the modifications. Must have enough space for the maximum value.
+     * @param minDigits The minimum number of digits. If the number is less than this it will be zero padded.
+     * @param countSign If true the sign is counted as a digit.
+     * @return The resultString.
+     */
+    static char * ZeroPad(char * resultString, int minDigits, bool countSign = false) {
+
+        int numDigits = strlen(resultString);
+        int digitStartIndex = 0;
+        
+        if (resultString[0] == '-' || resultString[0] == '+') {
+            digitStartIndex = 1;
+            if(countSign == false){
+                numDigits--;
+            }
+        }
+
+        if (numDigits < minDigits) {
+            int difference = minDigits - numDigits;
+            for (int i = numDigits - 1; i >= 0; i--) {
+                resultString[i + difference + digitStartIndex] = resultString[i + digitStartIndex];
+            }
+
+            for (int i = 0; i < difference; i++) {
+                resultString[i + digitStartIndex] = '0';
+            }
+
+            resultString[minDigits + digitStartIndex] = '\0';
+        }
+        return resultString;
+
+
+    }
+
     /** Converts the string representation of a decimal number to it's value.
      * 
      * @param number     the string representation of a  base 10 number.
@@ -51,7 +88,9 @@ public:
      *                   through '9'.
      * @param terminator optionally specify a termination character to end the
      *                   string.
-     * @returns          the 32 bit value of the representation.
+     * @returns          the 32 bit value of the representation. If any 
+     *                   characters are not valid numbers or the terminator, 
+     *                   then returns INT_MIN.
      */
     static int Dec(const char * number, const char terminator = '\0') {
         int result = 0;
@@ -62,6 +101,11 @@ public:
             index++;
         }
         for (; number[index] != terminator; index++) {
+            // 'Crash' if non-numeric character is found.
+            if (number[index] < '0' || number[index] > '9') {
+                return INT_MIN;
+            }
+
             //       Shift left      Add 1's unit
             result = (result * 10) + (number[index] - '0');
         }
