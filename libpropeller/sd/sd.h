@@ -2,15 +2,16 @@
 #define LIBPROPELLER_SD_H_
 
 #include <propeller.h>
+#include <stdarg.h>
 #include "libpropeller/sd/sdsafespi.h"
 
+#include "libpropeller/printstream/printstream.h"
 
 #define RET_IF_ERROR_NULL if(HasError()){return NULL;}
 #define RET_IF_ERROR if(HasError()){return;}
 #define THROW_NULL(value) {SetErrorCode((value)); return NULL;}
 //#define THROW_FALSE(value) {SetErrorCode((value)); return false;}
 #define THROW(value) {SetErrorCode((value)); return;}
-
 
 /** FAT16/32 SD card interface.
  * 
@@ -59,7 +60,7 @@
  * Write a function that gets a string:
  *       int   Get(char * Ubuf, char EndOfStringChar); 
  */
-class SD {
+class SD : public OutputStream<SD> {
 public:
     static const int kNoError = SDSafeSPI::kNoError;
 
@@ -270,6 +271,7 @@ public:
             char * disk_filename = ReadByte(directory_pointer);
             RET_IF_ERROR;
 
+            // 0xe5 is the indicator that the entry is deleted. Ox00 is the indicator for end of directory.
             if ((free_entry == 0) && (((disk_filename)[0] == 0) || ((disk_filename)[0] == 0xe5))) {
                 free_entry = directory_pointer;
             }
@@ -485,6 +487,16 @@ public:
         return total_bytes_written;
     }
 
+    int PutFormatted(const char * formatString, ...) {
+        PrintStream<SD> ps(this);
+
+        va_list list;
+        va_start(list, formatString);
+        int result = ps.Format(formatString, list);
+        va_end(list);
+        return result;
+    }
+
     /** Set up for a directory file listing.
      * 
      * Close the currently open file, and set up the read buffer for calls to 
@@ -508,7 +520,21 @@ public:
      * @param filename The extracted filename
      * @return true if there is a valid filename, false otherwise.
      */
+
     bool NextFile(char * filename) {
+        int filesize, year, month, day, hour, minute, second;
+        return NextFile(filename, filesize, year, month, day, hour, minute, second);
+    }
+    
+    bool NextFile(char * filename, int & filesize) {
+        int year, month, day, hour, minute, second;
+        return NextFile(filename, filesize, year, month, day, hour, minute, second);
+    }
+
+    bool NextFile(char * filename,
+            int & filesize,
+            int & year, int & month, int & day, int & hour, int & minute, int & second) {
+
         while (true) {
             if (current_buffer_location_ >= buffer_end_) {
                 if (FillBuffer() < 0) {
@@ -519,13 +545,13 @@ public:
                 }
             }
 
-            unsigned char * at = (unsigned char *) ((int) &buffer_1_ + current_buffer_location_);
+            char * at = (char *) ((int) &buffer_1_ + current_buffer_location_);
 
             if ((at)[0] == 0) {
                 return false;
             }
             current_buffer_location_ = (current_buffer_location_ + kDirectorySize);
-            if (((at)[0] != 0xe5)
+            if (((at)[0] != 0xe5) && ((at)[0] != 0xeb)
                     && (((at)[0x0b] & 0x18) == 0)) {
                 char * lns = filename;
 
@@ -544,6 +570,10 @@ public:
                     }
                 }
                 filename[0] = 0;
+                
+                filesize = ReverseBytesInLong(at + 28);
+                ExtractDateTime(ReverseBytesInLong(at + 22), year, month, day, hour, minute, second);
+                
                 return true;
             }
         }
@@ -619,7 +649,7 @@ public:
         file_date_time_ += (hour << 11) + (minute << 5) + (second >> 1);
         return file_date_time_;
     }
-
+    
     /** If there was an error in the SD routines then this function will return
      * an error code.
      * 
@@ -1119,6 +1149,21 @@ private:
             RET_IF_ERROR;
 
         }
+    }
+    
+    /** Extract the date and time from a FAT date time entry.
+     * 
+     * The decoding was taken from here: http://www.win.tue.nl/~aeb/linux/fs/fat/fat-1.html
+     */
+    void ExtractDateTime(int FATDate,
+            int & year, int & month, int & day,
+            int & hour, int & minute, int & second){
+        year = ((FATDate >> 25) & 0b1111111) + 1980;
+        month = (FATDate >> 21) & 0b1111;
+        day = (FATDate >> 16) & 0b11111;
+        hour = (FATDate >> 11) & 0b11111;
+        minute = (FATDate >> 5) & 0b111111;
+        second = (FATDate & 0b11111) << 1;
     }
 
     /** Get the minimum of two integers.

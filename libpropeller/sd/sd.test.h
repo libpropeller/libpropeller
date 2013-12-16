@@ -49,7 +49,7 @@ public:
         const int MAXIMUM_FILE_COUNT = 1000;
         int count;
         for (count = 0; count < MAXIMUM_FILE_COUNT; count++) {
-
+            
             char filename [13];
             sut.OpenRootDirectory();
             if (sut.NextFile(filename) != true) {
@@ -136,7 +136,7 @@ public:
         }
         TEST_ASSERT_EQUAL_INT(cogsFreeBefore, help_CountNumberOfFreeCogs());
     }
-
+    
     // -----------------------------------------------------------------------------
     // File operations (open, close, etc.)
     // -----------------------------------------------------------------------------
@@ -599,5 +599,55 @@ public:
 
         TEST_ASSERT_EQUAL_INT(strlen(content), sut.GetFilesize());
     }
+ 
+    
+    static void test_NextFileGetFilesize(void){
+        const char filename[] = "SOME.TXT";
+        const char content[] = "Some text to write";
+        sut.Open(filename, 'w');
+        sut.Put(content);
+        sut.Close();
+        
+        sut.OpenRootDirectory();
+        
+        int filesize = 0;
+        char readFilename[12];
+        TEST_ASSERT_TRUE(sut.NextFile(readFilename, filesize));
+        TEST_ASSERT_EQUAL_INT(strlen(content), filesize);
+        
+    }
+    
+    static void test_NextFileGetModificationTime(void){
+        const char filename[] = "SOME.TXT";
+        const char content[] = "Some text to write";
+        
+        int year = 2013;
+        int month = 11;
+        int day = 16;
+        int hour = 12;
+        int minute = 59;
+        int second = 48;
+        
+        sut.SetDate(year, month, day, hour, minute, second);
+        
+        sut.Open(filename, 'w');
+        sut.Put(content);
+        sut.Close();
+        
+        sut.OpenRootDirectory();
+        
+        int filesize;
+        int year2, month2, day2, hour2, minute2, second2;
+        char readFilename[12];
+        TEST_ASSERT_TRUE(sut.NextFile(readFilename, filesize, year2, month2, day2, hour2, minute2, second2));
+        TEST_ASSERT_EQUAL_INT(year, year2);
+        TEST_ASSERT_EQUAL_INT(month, month2);
+        TEST_ASSERT_EQUAL_INT(day, day2);
+        TEST_ASSERT_EQUAL_INT(hour, hour2);
+        TEST_ASSERT_EQUAL_INT(minute, minute2);
+        TEST_ASSERT_EQUAL_INT(second, second2);
+    }
+    
 
 };
+ 
