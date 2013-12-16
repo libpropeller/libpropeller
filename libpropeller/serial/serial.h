@@ -5,6 +5,10 @@
 #include <propeller.h>
 #include "libpropeller/numbers/numbers.h"
 
+#include "libpropeller/streaminterface/streaminterface.h"
+
+#include "libpropeller/printstream/printstream.h"
+
 extern char _load_start_serial_cog[];
 
 /** A high speed and high accuracy serial driver.
@@ -26,7 +30,9 @@ extern char _load_start_serial_cog[];
  * @author SRLM (srlm@srlmproductions.com)
  * 
  */
-class Serial {
+class Serial : public InputStream<Serial>, public OutputStream<Serial>{
+//class Serial : public StreamInterface{
+//class Serial{
 public:
 
     /** Size of the RX buffer in bytes. No restrictions on size (well, Hub RAM 
@@ -53,8 +59,7 @@ public:
      * @param ctspin  cts is an input for control of flow from the tx pin. If high, it disables transmissions.
      * @return  Returns true if the cog started OK, false otherwise
      */
-    bool Start(const int rxpin, const int txpin, const int rate, 
-    const int ctspin = -1) {
+    bool Start(const int rxpin, const int txpin, const int rate, const int ctspin = -1) {
         
         // Prevent garbage collection of the ASM code
         volatile void * asm_driver_reference = NULL;
@@ -103,7 +108,7 @@ public:
         SetBaud(rate);
 
         SetDriverLong(&Period_ptr, (int) &half_bit_period_);
-        memset((void *) &rx_buffer_, 0, 1 * (kBufferLength));
+        memset((void *) &rx_buffer_, 0, kBufferLength);
 
         SetDriverLong(&Rx_head_ptr, (int) &rx_buffer_);
         SetDriverLong(&Rx_end_ptr, (int) &rx_buffer_ + kBufferLength);
@@ -200,155 +205,7 @@ public:
         return Put(buffer_ptr, strlen(buffer_ptr));
     }
 
-    /** Transmit a string (printf function-alike).
-     *
-     * This function is based on the requirements found on this page:
-     * http://www.cplusplus.com/reference/cstdio/printf/
-     * 
-     * @warning This function does not implement the full printf functionality.
-     * 
-     * Formatters must follow the following prototype:
-     * %[flags][width]specifier
-     * The following flags are supported
-     * - 0 (only with x,X,b,B). Sets padding to the 0 character instead of space.
-     * This function supports the following specifiers:
-
     
-     * - d or i : signed decimal integer. The width specifier will pad with 
-     *          spaces if necessary.
-     * - x or X : hexadecimal integer. All caps (with either). The width
-     *          specifier will pad with spaces (or 0s if the 0 flag is set) if
-     *          necessary
-     * - c      : output a single character.
-     * - s      : output a string of characters, 0 terminated.
-     * - %      : output a % symbol.
-     * 
-     * Each specifier must have a matching typed optional argument.
-     * 
-     * Behavior is undefined if % is used without a specifier.
-     * 
-     * @param format the string to send, optionally with specifiers.
-     * @param ...    additional arguments. Depending on the format string, the
-     *                  function may expect a sequence of additional arguments.
-     * @returns      on success, the total number of characters written. On
-     *                  error, a negative number is returned.
-     */
-    int PutFormatted(const char * format, ...) {
-        if (format == NULL) {
-            return 0;
-        }
-
-        int bytesWritten = 0;
-
-        va_list list;
-        va_start(list, format);
-
-
-        for (int stringIndex = 0; format[stringIndex] != 0; stringIndex++) {
-
-            if (format[stringIndex] == '%') {
-                //Found formatter!
-                stringIndex++;
-                //Check for flags:
-                bool padZero = false;
-                int padAmount = 0;
-                if (format[stringIndex] == '0') {
-                    padZero = true;
-                    stringIndex++;
-                }
-                if (format[stringIndex] >= '1' and format[stringIndex] <= '9') {
-                    char paddingBuffer[5];
-                    int paddingIndex = 0;
-
-
-                    //Non freezing version.				
-                    if (format[stringIndex] >= '0' and format[stringIndex] <= '9') {
-                        paddingBuffer[paddingIndex++] = format[stringIndex++];
-                        if (format[stringIndex] >= '0' and format[stringIndex] <= '9') {
-                            paddingBuffer[paddingIndex++] = format[stringIndex++];
-                            if (format[stringIndex] >= '0' and format[stringIndex] <= '9') {
-                                paddingBuffer[paddingIndex++] = format[stringIndex++];
-                                if (format[stringIndex] >= '0' and format[stringIndex] <= '9') {
-                                    paddingBuffer[paddingIndex++] = format[stringIndex++];
-                                }
-                            }
-                        }
-                    }
-
-                    //TO DO(SRLM): figure out what is happening with the freezing version.
-                    //I think it freezes because of the CMM and fcache combination.
-                    //Freezing version:				
-                    //				while(format[stringIndex] >= '0' and format[stringIndex] <= '9'){
-                    //					paddingBuffer[paddingIndex++] = format[stringIndex];
-                    ////					printf("+%c+", format[stringIndex]);				
-                    //					stringIndex++;
-                    //				}
-                    paddingBuffer[paddingIndex] = 0;
-                    padAmount = Numbers::Dec(paddingBuffer);
-                    //				printf("paddingBuffer[0] = %c\r\n", paddingBuffer[0]);
-                    //				printf("paddingBuffer[1] = %c\r\n", paddingBuffer[1]);
-                    //				printf("paddingIndex = %i\r\n", paddingIndex);
-                    //				printf("padAmount: %i\r\n", padAmount);
-
-
-                }
-
-
-
-                if (format[stringIndex] == 0) {
-                    // Throw away the '%' character if it's at the end of the string.
-                    break;
-                }
-                if (format[stringIndex] == 'd' || format[stringIndex] == 'i') {
-                    int number = va_arg(list, int);
-                    int digits = Numbers::DecDigits(number);
-                    if (padAmount > 0) {
-                        for (int i = padAmount - digits; i > 0; --i) {
-                            Put(' ');
-                        }
-                    }
-
-                    PutFormatted(Numbers::Dec(number));
-                    bytesWritten += digits;
-                } else if (format[stringIndex] == 'x' || format[stringIndex] == 'X') {
-                    int number = va_arg(list, int);
-                    int digits = Numbers::HexDigits(number);
-                    if (padAmount > 0) {
-                        for (int i = padAmount - digits; i > 0; --i) {
-                            if (padZero) {
-                                Put('0');
-                            } else {
-                                Put(' ');
-                            }
-                        }
-                    }
-
-                    PutFormatted(Numbers::Hex(number, digits));
-                    bytesWritten += digits;
-                } else if (format[stringIndex] == 'c') {
-                    char character = (char) (va_arg(list, int));
-                    Put(character);
-                    bytesWritten++;
-                } else if (format[stringIndex] == 's') {
-                    char * string = (char *) (va_arg(list, int));
-                    while (*string != 0) {
-                        Put(*string++);
-                        bytesWritten++;
-                    }
-                } else if (format[stringIndex] == '%') {
-                    Put('%');
-                    bytesWritten++;
-                }
-
-            } else {
-                Put(format[stringIndex]);
-                bytesWritten++;
-            }
-        }
-
-        va_end(list);
-        return bytesWritten;
-    }
 
     /** Receive a byte (wait) or timeout.
      * 
@@ -446,6 +303,16 @@ public:
         } else {
             return kBufferLength - tail + head;
         }
+    }
+    
+    int PutFormatted(const char * formatString, ...){
+        PrintStream<Serial> ps(this);
+        
+        va_list list;
+        va_start(list, formatString);
+        int result = ps.Format(formatString, list);
+        va_end(list);
+        return result;
     }
 
 
