@@ -65,9 +65,9 @@ public:
         int x, y, z;
         TEST_ASSERT_TRUE(acclMagn.ReadMagn(x, y, z));
 
-        TEST_ASSERT_EQUAL_HEX32(0x010, x);
-        TEST_ASSERT_EQUAL_HEX32(0x030, y);
-        TEST_ASSERT_EQUAL_HEX32(0x050, z);
+        TEST_ASSERT_EQUAL_HEX32(0x0102, x);
+        TEST_ASSERT_EQUAL_HEX32(0x0304, z);
+        TEST_ASSERT_EQUAL_HEX32(0x0506, y);
     }
 
     static void test_ReadMagnNegativeNumbers(void) {
@@ -77,9 +77,9 @@ public:
         int x, y, z;
         TEST_ASSERT_TRUE(acclMagn.ReadMagn(x, y, z));
 
-        TEST_ASSERT_EQUAL_HEX32(0xFFFFFF1A, x);
-        TEST_ASSERT_EQUAL_HEX32(0xFFFFFF3A, y);
-        TEST_ASSERT_EQUAL_HEX32(0xFFFFFF5A, z);
+        TEST_ASSERT_EQUAL_HEX32(0xFFFFFF1A2, x);
+        TEST_ASSERT_EQUAL_HEX32(0xFFFFFF3A4, z);
+        TEST_ASSERT_EQUAL_HEX32(0xFFFFFF5A6, y);
     }
 
     //TODO(SRLM): Add tests for the ReadAccl/ReadMagn bus->Get == bus->kNak case
