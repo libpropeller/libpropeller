@@ -289,4 +289,8 @@ private:
     static char internalBuffer[];
 };
 
+#ifdef SINGLE_TRANSLATION_UNIT
+#include "numbers.cpp"
+#endif
+
 #endif // LIBPROPELLER_NUMBERS_H_
