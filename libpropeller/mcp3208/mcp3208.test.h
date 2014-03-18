@@ -5,7 +5,7 @@
 
 #include "libpropeller/board/board_unit_tester.h"
 
-MCP3208 * sut;
+libpropeller::MCP3208 * sut;
 
 
 const int kChannelDac = 3;
@@ -34,11 +34,11 @@ class UnityTests {
 public:
 
     static void setUp(void) {
-        sut = new MCP3208();
-        sut->Start(Board::kPinMCP3208Data,
-                Board::kPinMCP3208Clock,
-                Board::kPinMCP3208Select, kMode,
-                Board::kPinDac);
+        sut = new libpropeller::MCP3208();
+        sut->Start(libpropeller::Board::kPinMCP3208Data,
+                libpropeller::Board::kPinMCP3208Clock,
+                libpropeller::Board::kPinMCP3208Select, kMode,
+                libpropeller::Board::kPinDac);
         waitcnt(CLKFREQ / 100 + CNT);
     }
 
@@ -90,8 +90,4 @@ public:
         waitcnt(CLKFREQ / 100 + CNT);
         TEST_ASSERT_INT_WITHIN(delta, kValue3v3Over2, sut->In(kChannelDac));
     }
-
-
-
 };
-

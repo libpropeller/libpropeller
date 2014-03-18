@@ -6,6 +6,8 @@
 #ifndef LIBPROPELLER_ELUM_H_
 #define LIBPROPELLER_ELUM_H_
 
+namespace libpropeller {
+
 /** Elum class to allow access to single Elums
 
 @warning This should not be used for a "heartbeat" or watchdog type application,
@@ -238,13 +240,6 @@ private:
     }
 };
 
-
+}
 
 #endif // SRLM_PROPGCC_ELUM_H_
-
-
-
-
-
-
-

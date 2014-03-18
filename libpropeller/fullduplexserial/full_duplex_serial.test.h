@@ -6,19 +6,19 @@
 
 #include "board/board_unit_tester.h"
 
-const int rxpin = Board::kPinTie1a;
-const int txpin = Board::kPinTie1b;
+const int rxpin = libpropeller::Board::kPinTie1a;
+const int txpin = libpropeller::Board::kPinTie1b;
 const int baud = 230400;
 
 const int TIMEOUT = 10;
 
-FullDuplexSerial * sut = NULL;
+libpropeller::FullDuplexSerial * sut = NULL;
 
 class UnityTests {
 public:
 
     static void setUp(void) {
-        sut = new FullDuplexSerial();
+        sut = new libpropeller::FullDuplexSerial();
         sut->Start(rxpin, txpin, 0, baud);
     }
 

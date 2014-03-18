@@ -7,6 +7,8 @@
 
 #include "pin/pin.h"
 
+namespace libpropeller {
+
 /** Operate a VNH2SP30 brushed DC motor driver.
  * 
  * This class runs using either the PWM2 or PWM32 class. The advantage of the
@@ -86,10 +88,10 @@ public:
      * @param inApin     The pin connected to inA (with voltage translator)
      * @param inBpin     The pin connected to inB (with voltage translator)
      */
-    void Init(PWM32 * new_pwm, const int new_pwmPin, const int inApin, const int inBpin) {
-        inA = Pin(inApin);
-        inB = Pin(inBpin);
-        pwmPin = Pin(new_pwmPin);
+    void Init(libpropeller::PWM32 * new_pwm, const int new_pwmPin, const int inApin, const int inBpin) {
+        inA = libpropeller::Pin(inApin);
+        inB = libpropeller::Pin(inBpin);
+        pwmPin = libpropeller::Pin(new_pwmPin);
 
         inA.low();
         inB.low();
@@ -111,10 +113,11 @@ public:
      * @param inApin      The pin connected to inA (with voltage translator)
      * @param inBpin      The pin connected to inB (with voltage translator)
      */
-    void Init(PWM2 * new_pwm, const PwmChannel new_channel, const int new_pwmPin, const int inApin, const int inBpin) {
-        inA = Pin(inApin);
-        inB = Pin(inBpin);
-        pwmPin = Pin(new_pwmPin);
+    void Init(libpropeller::PWM2 * new_pwm, const PwmChannel new_channel, const int new_pwmPin,
+            const int inApin, const int inBpin) {
+        inA = libpropeller::Pin(inApin);
+        inB = libpropeller::Pin(inBpin);
+        pwmPin = libpropeller::Pin(new_pwmPin);
 
         inA.low();
         inB.low();
@@ -202,9 +205,9 @@ public:
 
 private:
 
-    Pin inA, inB, pwmPin;
-    PWM32* pwm32;
-    PWM2* pwm2;
+    libpropeller::Pin inA, inB, pwmPin;
+    libpropeller::PWM32* pwm32;
+    libpropeller::PWM2* pwm2;
 
     PwmChannel channel;
 
@@ -226,18 +229,8 @@ private:
     void SetSpeedPwm32(const int speed) {
         pwm32->Duty(pwmPin.getPin(), speed, 1000000 / kFrequency);
     }
-
-
-
-
-
-
-
-
-
-
-
-
 };
+
+}
 
 #endif // libpropeller_vnh2sp30_h__

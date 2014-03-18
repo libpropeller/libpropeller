@@ -18,6 +18,8 @@ static int tmp__;
 #define Yield__()
 #endif
 
+namespace libpropeller {
+
 /** Run up to 32 channels of low speed PWM (up to ~10kHz@80MHz clock).
  * 
  * No external hardware beyond the PWM devices is needed. Works with H bridges,
@@ -322,15 +324,8 @@ private:
         return data;
     }
 
-
-
-
-
-
 };
 
-
-
-
+}
 
 #endif // libpropeller_pwm32_h__

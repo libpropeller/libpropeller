@@ -6,6 +6,8 @@
 
 #include <stdio.h>
 
+namespace libpropeller {
+
 template<class OutputType>
 class PrintStream {
 public:
@@ -120,7 +122,7 @@ public:
                         stringIndex++;
                     }
                     paddingBuffer[paddingIndex] = 0;
-                    padAmount = Numbers::Dec(paddingBuffer);
+                    padAmount = libpropeller::Numbers::Dec(paddingBuffer);
                     //				printf("paddingBuffer[0] = %c\r\n", paddingBuffer[0]);
                     //				printf("paddingBuffer[1] = %c\r\n", paddingBuffer[1]);
                     //				printf("paddingIndex = %i\r\n", paddingIndex);
@@ -137,25 +139,25 @@ public:
                 }
                 if (formatString[stringIndex] == 'd' || formatString[stringIndex] == 'i') {
                     int number = va_arg(list, int);
-                    int digits = Numbers::DecDigits(number);
+                    int digits = libpropeller::Numbers::DecDigits(number);
                     if (padAmount > 0) {
                         if (padZero == true) {
-                            os->Put(Numbers::ZeroPad(Numbers::Dec(number), padAmount, true) );
+                            os->Put(libpropeller::Numbers::ZeroPad(libpropeller::Numbers::Dec(number), padAmount, true) );
                         } else {
                             for (int i = padAmount - digits; i > 0; --i) {
                                 os->Put(' ');
                             }
-                            os->Put(Numbers::Dec(number));
+                            os->Put(libpropeller::Numbers::Dec(number));
                         }
                     }else{
-                        os->Put(Numbers::Dec(number));
+                        os->Put(libpropeller::Numbers::Dec(number));
                     }
 
                     
                     bytesWritten += digits;
                 } else if (formatString[stringIndex] == 'x' || formatString[stringIndex] == 'X') {
                     int number = va_arg(list, int);
-                    int digits = Numbers::HexDigits(number);
+                    int digits = libpropeller::Numbers::HexDigits(number);
                     if (padAmount > 0) {
                         for (int i = padAmount - digits; i > 0; --i) {
                             if (padZero) {
@@ -166,7 +168,7 @@ public:
                         }
                     }
 
-                    os->Put(Numbers::Hex(number, digits));
+                    os->Put(libpropeller::Numbers::Hex(number, digits));
                     bytesWritten += digits;
                 } else if (formatString[stringIndex] == 'c') {
                     char character = (char) (va_arg(list, int));
@@ -192,5 +194,7 @@ public:
     }
 
 };
+
+}
 
 #endif // LIBPROPELLER_PRINTSTREAM_H_

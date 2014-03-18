@@ -11,16 +11,16 @@ const int kSDAPin = 1;
 const int kSCLPin = 2;
 
 
-I2C * bus;
-L3GD20 gyro;
+libpropeller::I2C * bus;
+libpropeller::L3GD20 gyro;
 
 class UnityTests {
 public:
 
     static void setUp(void) {
-        bus = new I2C();
+        bus = new libpropeller::I2C();
         bus->Init(kSCLPin, kSDAPin);
-        gyro.Init(bus, L3GD20::LSB_1);
+        gyro.Init(bus, libpropeller::L3GD20::LSB_1);
     }
 
     static void tearDown(void) {

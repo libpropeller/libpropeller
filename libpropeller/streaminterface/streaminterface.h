@@ -1,6 +1,8 @@
 #ifndef LIBPROPELLER_STREAMINTERFACE_H_
 #define LIBPROPELLER_STREAMINTERFACE_H_
 
+namespace libpropeller {
+
 template<class Derived>
 struct InputStream{
     int Get(const int timeout = -1){
@@ -33,5 +35,6 @@ struct OutputStream{
     }
 };
 
-#endif // LIBPROPELLER_STREAMINTERFACE_H_
+}
 
+#endif // LIBPROPELLER_STREAMINTERFACE_H_

@@ -3,6 +3,8 @@
 
 #include "libpropeller/i2c/i2c_base.h"
 
+namespace libpropeller {
+
 /** Access I2C EEPROMs.
  * 
  * Valid EEPROM data addresses are in the range 0 to 0xFFFF for 64KB EEPROMS, and 0 to 0x7FFF for 32KB EEPROMs.
@@ -200,5 +202,7 @@ private:
     static const unsigned char kI2CAddress = 0b10100000;
 
 };
+
+}
 
 #endif // LIBPROPELLER_EEPROM_H_

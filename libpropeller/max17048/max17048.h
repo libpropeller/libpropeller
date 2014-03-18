@@ -4,6 +4,8 @@
 
 #include "libpropeller/i2c/i2c.h"
 
+namespace libpropeller {
+
 /**Interface to the MAX17048 Fuel Chip
  * 
  * This chip monitors a single cell Lithium battery, and calculates metrics of battery use.
@@ -119,5 +121,6 @@ private:
 
 };
 
+}
 
 #endif // LIBPROPELLER_MAX17048_H_

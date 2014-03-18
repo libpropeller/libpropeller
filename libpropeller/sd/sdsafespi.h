@@ -12,6 +12,8 @@
 #define THROW_INT(value) {SetErrorCode((value)); return error;}
 #define THROW(value) {SetErrorCode((value)); return;}
 
+namespace libpropeller {
+
 /**  SPI interface routines for SD & SDHC & MMC cards
  * 
  * C++ conversion by SRLM, based on sdsafespi.spin version 0.3.0 by Jonathan
@@ -597,5 +599,7 @@ private:
     }
 
 };
+
+}
 
 #endif // LIBPROPELLER_SDSAFESPI_H_

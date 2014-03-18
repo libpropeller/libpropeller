@@ -1,5 +1,8 @@
 #ifndef LIBPROPELLER_BOARD_H_
 #define LIBPROPELLER_BOARD_H_
+
+namespace libpropeller {
+
 /**
 This nameplace defines the standard unit testing board.
 */
@@ -37,6 +40,8 @@ namespace Board{
 	const int kPinEepromSda = 29;
 	const int kPinUsbTx = 30;
 	const int kPinUsbRx = 31;
+}
+
 }
 
 #endif // libpropeller_board_h_

@@ -14,13 +14,13 @@ const int kPIN_USER_2 = 19;
 All tests requires that pins 18 and 19 be connected by a resistor.
  */
 
-GPSParser * sut;
+libpropeller::GPSParser * sut;
 
 class UnityTests {
 public:
 
     static void setUp(void) {
-        sut = new GPSParser();
+        sut = new libpropeller::GPSParser();
         sut->Start(kPIN_USER_1, kPIN_USER_2, 9600);
     }
 

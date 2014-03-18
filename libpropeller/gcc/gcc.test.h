@@ -529,21 +529,4 @@ public:
 	static void test_nullptrIsTheSameAsNULL(void){
 		TEST_ASSERT_TRUE(nullptr == NULL);
 	}
-
-
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

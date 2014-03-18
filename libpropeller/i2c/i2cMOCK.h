@@ -5,6 +5,8 @@
 
 #ifdef UNIT_TEST
 
+namespace libpropeller {
+
 /*
 
 Notes:
@@ -76,6 +78,8 @@ public:
         }
     }
 };
+
+}
 
 #endif // Unit_Test
 

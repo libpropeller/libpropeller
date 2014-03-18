@@ -9,15 +9,15 @@
 //TODO(SRLM): Add tests for startup conditions: reading right after start, reading after a single transition
 //TODO(SRLM): Add test for reading a pin that has never changed while other pins have.
 
-PulseWidthReader * sut;
+libpropeller::PulseWidthReader * sut;
 
-const int kPulseMask = (1 << Board::kPinSqw)
-| (1 << Board::kPinTie1b)
-| (1 << Board::kPinTie2b);
+const int kPulseMask = (1 << libpropeller::Board::kPinSqw)
+| (1 << libpropeller::Board::kPinTie1b)
+| (1 << libpropeller::Board::kPinTie2b);
 
 
-Pin sqwOutputPin1(Board::kPinTie1a);
-Pin sqwOutputPin2(Board::kPinTie2a);
+libpropeller::Pin sqwOutputPin1(libpropeller::Board::kPinTie1a);
+libpropeller::Pin sqwOutputPin2(libpropeller::Board::kPinTie2a);
 
 const int stacksize = sizeof (_thread_state_t) + sizeof (int) * 30;
 int stack [stacksize];
@@ -40,7 +40,7 @@ public:
         sqwOutputPin1.input();
         sqwOutputPin2.input();
 
-        sut = new PulseWidthReader();
+        sut = new libpropeller::PulseWidthReader();
         sut->Start(kPulseMask);
         waitcnt(CLKFREQ / 100 + CNT);
     }
@@ -138,9 +138,4 @@ public:
         TEST_ASSERT_INT_WITHIN(130, CLKFREQ / (2 * kClockFrequency), sut->getHighTime(kSqwIndex));
         TEST_ASSERT_INT_WITHIN(130, CLKFREQ / (2 * kClockFrequency), sut->getLowTime(kSqwIndex));
     }
-
-
-
-
-
 };

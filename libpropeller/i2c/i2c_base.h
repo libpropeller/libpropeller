@@ -10,6 +10,8 @@
 
 //Note: refactoring this into it's own class took all of 8 bytes extra :^)
 
+namespace libpropeller {
+
 /** Low level I2C driver. Only does the most basic functions that all I2C devices implement.
  * 
  * Requires that the SDA and SCL pins have sufficient pullups. These should be selected based on the capacitance of the devices on the I2C bus, and the expected clock speed (400kHz currently).
@@ -225,6 +227,6 @@ private:
 
 };
 
-
+}
 
 #endif // LIBPROPELLER_I2C_BASE_H_

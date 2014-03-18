@@ -4,6 +4,8 @@
 
 extern char _load_start_pulsewidthreader_cog[];
 
+namespace libpropeller {
+
 /** Record high and low times simultaniously on any number of pins.
  *  
  * Based on ReadPulseWidths.spin v1.0 by David Carrier. Thanks!
@@ -98,5 +100,7 @@ private:
     
 
 };
+
+}
 
 #endif // libpropeller_readpulsewidths_h__

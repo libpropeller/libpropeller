@@ -3,8 +3,8 @@
 #include "libpropeller/i2c/i2c.h"
 #include "libpropeller/max17048/max17048.h"
 
-MAX17048 * sut;
-I2C * bus;
+libpropeller::MAX17048 * sut;
+libpropeller::I2C * bus;
 
 const int kPIN_I2C_SCL = 0;
 const int kPIN_I2C_SDA = 1;
@@ -13,9 +13,9 @@ class UnityTests {
 public:
 
     static void setUp(void) {
-        bus = new I2C();
+        bus = new libpropeller::I2C();
         bus->Init(kPIN_I2C_SCL, kPIN_I2C_SDA);
-        sut = new MAX17048();
+        sut = new libpropeller::MAX17048();
         sut->Init(bus);
     }
 
@@ -51,7 +51,3 @@ public:
     }
 
 };
-
-
-
-

@@ -3,6 +3,10 @@
 
 #include "libpropeller/serial/serial.h"
 
+class UnityTests;
+
+namespace libpropeller {
+
 /** Receives and parses NMEA0183 GPS streams into C strings.
  * 
  * Requires 1 cog to operate.
@@ -131,9 +135,9 @@ private:
         return &gps_serial_;
     }
 public:
-    friend class UnityTests;
+    friend class ::UnityTests;
 };
 
-
+}
 
 #endif // LIBPROPELLER_GPSPARSER_H_

@@ -13,6 +13,8 @@ extern unsigned volatile int unit_CNT;
 extern unsigned volatile int unit_CLKFREQ;
 #endif
 
+namespace libpropeller {
+
 /** A pollable timer to help schedule events.
  *
  * @warning: This class does not guarentee a minimum seperation between true 
@@ -81,5 +83,7 @@ private:
     unsigned int start_CNT_;
     unsigned int period_ticks_;
 };
+
+}
 
 #endif // LIBPROPELLER_SCHEDULER_H_

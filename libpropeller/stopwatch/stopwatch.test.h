@@ -22,7 +22,7 @@ public:
     static void test_short_basic_case(void) {
         const int milliseconds = 10000;
         unit_CNT = 0;
-        Stopwatch sw;
+        libpropeller::Stopwatch sw;
         sw.Start();
         unit_CNT = unit_CLKFREQ / 1000 * milliseconds;
         TEST_ASSERT_EQUAL_INT(milliseconds, sw.GetElapsed());
@@ -31,7 +31,7 @@ public:
     static void test_long_basic_case(void) {
         const int milliseconds = 50000;
         unit_CNT = 0;
-        Stopwatch sw;
+        libpropeller::Stopwatch sw;
         sw.Start();
         unit_CNT = unit_CLKFREQ / 1000 * milliseconds;
         TEST_ASSERT_EQUAL_INT(milliseconds, sw.GetElapsed());
@@ -40,7 +40,7 @@ public:
     static void test_short_rollover_case(void) {
         const int milliseconds = 5000;
         unit_CNT = 0xFfffFfff;
-        Stopwatch sw;
+        libpropeller::Stopwatch sw;
         sw.Start();
         unit_CNT = unit_CNT + unit_CLKFREQ / 1000 * milliseconds;
         TEST_ASSERT_EQUAL_INT(milliseconds, sw.GetElapsed());
@@ -49,7 +49,7 @@ public:
     static void test_long_rollover_case(void) {
         const int milliseconds = 50000;
         unit_CNT = 0xFfffFfff;
-        Stopwatch sw;
+        libpropeller::Stopwatch sw;
         sw.Start();
         unit_CNT = unit_CNT + unit_CLKFREQ / 1000 * milliseconds;
         TEST_ASSERT_EQUAL_INT(milliseconds, sw.GetElapsed());

@@ -1,3 +1,3 @@
 #include "libpropeller/numbers/numbers.h"
 
-char Numbers::internalBuffer[33];
+char libpropeller::Numbers::internalBuffer[33];

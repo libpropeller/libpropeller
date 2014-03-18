@@ -9,18 +9,17 @@
 const int kPIN_I2C_SCL = 0;
 const int kPIN_I2C_SDA = 1;
 
-I2C * bus = NULL; //nullptr;
-MS5611 * sut = NULL; //nullptr;
-
+libpropeller::I2C * bus = NULL; //nullptr;
+libpropeller::MS5611 * sut = NULL; //nullptr;
 
 class UnityTests {
 public:
 
     static void setUp(void) {
-        bus = new I2C;
+        bus = new libpropeller::I2C;
         bus->Init(kPIN_I2C_SCL, kPIN_I2C_SDA);
-        sut = new MS5611();
-        sut->Init(bus, MS5611::LSB_1);
+        sut = new libpropeller::MS5611();
+        sut->Init(bus, libpropeller::MS5611::LSB_1);
     }
 
     static void tearDown(void) {
@@ -172,36 +171,8 @@ public:
     }
 
     static void test_GetStatusIsFalseForNoBus(void) {
-        MS5611 dummy;
+        libpropeller::MS5611 dummy;
         TEST_ASSERT_FALSE(dummy.GetStatus());
     }
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

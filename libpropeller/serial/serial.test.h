@@ -23,7 +23,7 @@ const int rtspin = 21; //Output from Propeller (currently not used by driver, bu
 
 const int MAXTIME = 10; //maximum time (in milliseconds) to wait for GetCCheck for tests. Prevents hangups.
 
-Serial sut;
+libpropeller::Serial sut;
 
 class UnityTests {
 public:
@@ -115,7 +115,7 @@ public:
 
         int beforeCount = help_CountNumberOfFreeCogs();
         {
-            Serial temp;
+            libpropeller::Serial temp;
             temp.Start(rxpin, txpin, baud);
             TEST_ASSERT_EQUAL_INT(beforeCount - 1, help_CountNumberOfFreeCogs());
         }
@@ -362,15 +362,15 @@ public:
     }
 
     static void test_GetCountFew(void) {
-        for (int i = 0; i < Serial::kBufferLength / 2; i++) {
+        for (int i = 0; i < libpropeller::Serial::kBufferLength / 2; i++) {
             sut.Put(i);
         }
         waitcnt(CLKFREQ / 100 + CNT);
-        TEST_ASSERT_EQUAL_INT(Serial::kBufferLength / 2, sut.GetCount());
+        TEST_ASSERT_EQUAL_INT(libpropeller::Serial::kBufferLength / 2, sut.GetCount());
     }
 
     static void test_GetCountWrapAround(void) {
-        for (int i = 0; i < Serial::kBufferLength - 1; i++) {
+        for (int i = 0; i < libpropeller::Serial::kBufferLength - 1; i++) {
             sut.Put(i);
             sut.Get(i);
         }
@@ -382,59 +382,4 @@ public:
         waitcnt(CLKFREQ / 100 + CNT);
         TEST_ASSERT_EQUAL_INT(3, sut.GetCount());
     }
-
-
-
-
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

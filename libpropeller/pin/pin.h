@@ -7,6 +7,8 @@
 
 #include <propeller.h>
 
+namespace libpropeller {
+
 /** Pin class to allow access to single pins
  * 
  * 
@@ -143,53 +145,54 @@ private:
     void setOutput();
 };
 
-INLINE Pin::Pin() : pin_mask(0) {
+}
+
+INLINE libpropeller::Pin::Pin() : pin_mask(0) {
     pinNumber = -1;
 }
 
-INLINE Pin::Pin(int pin) : pin_mask(1 << pin) {
+INLINE libpropeller::Pin::Pin(int pin) : pin_mask(1 << pin) {
     pinNumber = pin;
 }
 
-INLINE int Pin::getPin(void) {
+INLINE int libpropeller::Pin::getPin(void) {
     return pinNumber;
 }
 
-INLINE void Pin::high() {
+INLINE void libpropeller::Pin::high() {
     OUTA |= pin_mask;
     setOutput();
 }
 
-INLINE void Pin::low() {
+INLINE void libpropeller::Pin::low() {
     OUTA &= ~pin_mask;
     setOutput();
 }
 
-INLINE void Pin::toggle() {
+INLINE void libpropeller::Pin::toggle() {
     OUTA ^= pin_mask;
     setOutput();
 }
 
-INLINE void Pin::output(int setting) {
+INLINE void libpropeller::Pin::output(int setting) {
     if (setting == 1)
         high();
     else
         low();
 }
 
-INLINE bool Pin::isOutput() {
+INLINE bool libpropeller::Pin::isOutput() {
     return (DIRA & pin_mask) ? true : false;
 }
 
-INLINE int Pin::input() {
+INLINE int libpropeller::Pin::input() {
     DIRA &= ~pin_mask;
     return (INA & pin_mask) != 0;
 }
 
-INLINE void Pin::setOutput() {
+INLINE void libpropeller::Pin::setOutput() {
     DIRA |= pin_mask;
 }
-
 
 #endif // LIBPROPELLER_PIN_H_
 

@@ -9,13 +9,13 @@ const int kPIN_LEDG = 7;
 const int kPIN_BUTTON = 8;
 
 
-Elum * sut;
+libpropeller::Elum * sut;
 
 class UnityTests {
 public:
 
     static void setUp(void) {
-        sut = new Elum(kPIN_LEDR, kPIN_LEDG, kPIN_BUTTON);
+        sut = new libpropeller::Elum(kPIN_LEDR, kPIN_LEDG, kPIN_BUTTON);
     }
 
     static void tearDown(void) {
@@ -29,11 +29,11 @@ public:
     //}
 
     static void test_LEDs(void) {
-        sut->On(Elum::RED);
+        sut->On(libpropeller::Elum::RED);
         //	waitcnt(CLKFREQ*2 + CNT);
         sut->Fade(10);
         //	waitcnt(CLKFREQ*2 + CNT);
-        sut->Pattern(Elum::kManyFast);
+        sut->Pattern(libpropeller::Elum::kManyFast);
         //	waitcnt(CLKFREQ*2 + CNT);
         TEST_IGNORE_MESSAGE("Must check results manually.");
     }

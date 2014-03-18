@@ -7,6 +7,8 @@
 #include "libpropeller/i2c/i2cMOCK.h"
 #endif
 
+namespace libpropeller {
+
 /** Provides an interface the L3GD20 gyroscope.
  * 
  * "Output Data Rate, in digital-output accelerometers, defines the rate at which data is sampled. Bandwidth is the highest frequency signal that can be sampled without aliasing by the specified Output Data Rate. Per the Nyquist sampling criterion, bandwidth is half the Output Data Rate." -Analog Devices
@@ -116,5 +118,7 @@ private:
     }
 
 };
+
+}
 
 #endif // LIBPROPELLER_L3GD20_H_

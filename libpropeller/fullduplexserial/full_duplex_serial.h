@@ -16,6 +16,7 @@ static inline int Lookup__(int x, int b, int a[], int n) {
 
 extern char _load_start_full_duplex_serial_cog[];
 
+namespace libpropeller {
 
 //Warning: To change the buffer size you must change it here and in the .S file
 #define buffersize 256
@@ -250,5 +251,7 @@ private:
         return Rxbyte;
     }
 };
+
+}
 
 #endif // libpropeller_full_duplex_serial_h_
