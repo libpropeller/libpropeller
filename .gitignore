@@ -1,3 +1,7 @@
 nbproject/
 .netbeans_user_dir/
 *.elf
+.**project
+.settings/
+compileAll.py
+

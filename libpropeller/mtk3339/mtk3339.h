@@ -22,7 +22,9 @@ Summary of supported sentences (note: order changed):
 #include "libpropeller/gpsparser/gpsparser.h"
 #include <propeller.h>
 
-class MTK3339 : public GPSParser {
+namespace libpropeller {
+
+class MTK3339 : public libpropeller::GPSParser {
 public:
 
     /**
@@ -111,5 +113,7 @@ private:
 
 
 };
+
+}
 
 #endif // LIBPROPELLER_MTK3339_H_

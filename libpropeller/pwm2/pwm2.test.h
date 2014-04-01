@@ -4,14 +4,14 @@
 #include "libpropeller/board/board_unit_tester.h"
 #include "c++-alloc.h"
 
-PulseWidthReader * pwr;
+libpropeller::PulseWidthReader * pwr;
 
-PWM2 * sut;
+libpropeller::PWM2 * sut;
 
 const int kFrequency = 1000;
 
-const int outputPin = Board::kPinTie1a;
-const int inputPinMask = 1 << Board::kPinTie1b;
+const int outputPin = libpropeller::Board::kPinTie1a;
+const int inputPinMask = 1 << libpropeller::Board::kPinTie1b;
 
 class UnityTests {
 public:
@@ -25,12 +25,12 @@ public:
     }
 
     static void setUp(void) {
-        sut = new PWM2();
+        sut = new libpropeller::PWM2();
         sut->Start();
         sut->SetPinX(outputPin);
         sut->SetFrequency(kFrequency);
 
-        pwr = new PulseWidthReader();
+        pwr = new libpropeller::PulseWidthReader();
         pwr->Start(inputPinMask);
 
         waitcnt(CLKFREQ / 10 + CNT);
@@ -83,4 +83,3 @@ public:
     }
 
 };
-

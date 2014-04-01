@@ -4,6 +4,8 @@
 #include <string.h>
 #include <limits.h>
 
+namespace libpropeller {
+
 /** Convert between numbers and the various string representations.
  * 
  * @author SRLM
@@ -288,6 +290,8 @@ private:
      */
     static char internalBuffer[];
 };
+
+}
 
 #ifdef SINGLE_TRANSLATION_UNIT
 #include "numbers.cpp"

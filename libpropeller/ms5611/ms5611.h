@@ -13,6 +13,10 @@
 #define UNIT_TEST
 #endif
 
+class UnityTests;
+
+namespace libpropeller {
+
 /** MS5611 Barometer interface
  * 
  * Provides a simple interface to the MS5611 barometer and temperature sensor. 
@@ -48,7 +52,7 @@ public:
      * @param newbus The I2C bus to use.
      * @param address The least significant byte of the I2C address. Use the enum constants.
      */
-    bool Init(I2C * newbus, const AddressLSB address = LSB_0) {
+    bool Init(libpropeller::I2C * newbus, const AddressLSB address = LSB_0) {
 
         SetAddress(address);
 
@@ -285,7 +289,7 @@ private:
         return data[0] << 16 | data[1] << 8 | data[2];
     }
 
-    I2C * bus_;
+    libpropeller::I2C * bus_;
     Stopwatch timer;
 
     // These variables are straight from the MS5611 datasheet.
@@ -319,8 +323,10 @@ private:
 
 
 public:
-    friend class UnityTests;
+    friend class ::UnityTests;
 
 };
+
+}
 
 #endif // LIBPROPELLER_MS5611_H_

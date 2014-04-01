@@ -30,7 +30,7 @@ const int kCsPinNoSd = 21;
  */
 
 
-SD sut;
+libpropeller::SD sut;
 
 class UnityTests {
 public:
@@ -117,7 +117,7 @@ public:
 
     static void test_MountNoSd(void) {
         sut.Mount(kDoPinNoSd, kClkPinNoSd, kDiPinNoSd, kCsPinNoSd);
-        TEST_ASSERT_EQUAL_INT(SD::kErrorCardNotReset, sut.GetError());
+        TEST_ASSERT_EQUAL_INT(libpropeller::SD::kErrorCardNotReset, sut.GetError());
     }
 
     static void test_UnmountFreesCog(void) {
@@ -130,7 +130,7 @@ public:
         sut.Unmount();
         int cogsFreeBefore = help_CountNumberOfFreeCogs();
         {
-            SD temp;
+            libpropeller::SD temp;
             temp.Mount(kDoPin, kClkPin, kDiPin, kCsPin);
             TEST_ASSERT_EQUAL_INT(cogsFreeBefore - 1, help_CountNumberOfFreeCogs());
         }
@@ -650,4 +650,3 @@ public:
     
 
 };
- 

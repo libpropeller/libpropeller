@@ -46,3 +46,5 @@ Unit:
 	${CXX} ${CXXFLAGS} ${CLDFLAGS} -o main.elf -D UNIT_TEST -D SINGLE_TRANSLATION_UNIT ${UNITYPATH}unity.cpp *.generate.cpp ${ASM}
 	rm -f *.generate.*
 
+clean:
+	rm -f *.o *.elf *.a *.cog *.ecog *.binary *.map *.rawmap

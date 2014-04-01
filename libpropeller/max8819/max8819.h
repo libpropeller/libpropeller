@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <propeller.h>
 
+namespace libpropeller {
 
 /** Max8819.h - Max8819 class to allow access to single pins
 
@@ -105,7 +106,9 @@ public:
     };
 };
 
-void inline Max8819::Start(int CENpin, int CHGpin, int ENpin, int DLIM1pin, int DLIM2pin) {
+}
+
+void inline libpropeller::Max8819::Start(int CENpin, int CHGpin, int ENpin, int DLIM1pin, int DLIM2pin) {
 
 
     cen_mask = 1 << CENpin;
@@ -128,26 +131,26 @@ void inline Max8819::Start(int CENpin, int CHGpin, int ENpin, int DLIM1pin, int 
     SetCharge(HIGH);
 }
 
-inline Max8819::~Max8819() {
+inline libpropeller::Max8819::~Max8819() {
 }
 
-inline void Max8819::On() {
+inline void libpropeller::Max8819::On() {
     OUTA |= en_mask;
 }
 
-inline void Max8819::Off() {
+inline void libpropeller::Max8819::Off() {
     OUTA &= ~en_mask;
 }
 
-inline bool Max8819::GetCharge() {
+inline bool libpropeller::Max8819::GetCharge() {
     return (INA & chg_mask) == 0;
 }
 
-inline bool Max8819::GetPluggedIn() {
+inline bool libpropeller::Max8819::GetPluggedIn() {
     return (INA & cen_mask) != 0;
 }
 
-inline void Max8819::SetCharge(int rate) {
+inline void libpropeller::Max8819::SetCharge(int rate) {
     if (rate == OFF) {
         OUTA |= dlim1_mask; //1
         OUTA |= dlim2_mask; //1

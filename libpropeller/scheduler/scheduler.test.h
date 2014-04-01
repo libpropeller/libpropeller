@@ -29,7 +29,7 @@ public:
 
     static void test_SchedulerReadPeriodIncremented(void) {
         int default_hz = 100;
-        Scheduler scheduler(default_hz * 10);
+        libpropeller::Scheduler scheduler(default_hz * 10);
 
         unit_CNT += 1;
 
@@ -53,13 +53,13 @@ public:
 
     static void test_SchedulerLowBoth(void) {
         unit_CNT = 0x0;
-        Scheduler scheduler(default_hz);
+        libpropeller::Scheduler scheduler(default_hz);
         TEST_ASSERT_FALSE(scheduler.Run());
     }
 
     static void test_SchedulerLowBothOpposite(void) {
         unit_CNT = 0x10;
-        Scheduler scheduler(default_hz);
+        libpropeller::Scheduler scheduler(default_hz);
         unit_CNT = 0x7FFFFFFF;
 
         TEST_ASSERT_TRUE(scheduler.Run());
@@ -67,40 +67,40 @@ public:
 
     static void test_SchedulerHighBoth(void) {
         unit_CNT = 0xF0000000;
-        Scheduler scheduler(default_hz);
+        libpropeller::Scheduler scheduler(default_hz);
         TEST_ASSERT_FALSE(scheduler.Run());
     }
 
     static void test_SchedulerHighBothOpposite(void) {
         unit_CNT = 0x80000000;
-        Scheduler scheduler(default_hz);
+        libpropeller::Scheduler scheduler(default_hz);
         unit_CNT = 0xFFFFFFFF;
         TEST_ASSERT_TRUE(scheduler.Run());
     }
 
     static void test_SchedulerRollover(void) {
         unit_CNT = 0xFFFFFFFF;
-        Scheduler scheduler(default_hz);
+        libpropeller::Scheduler scheduler(default_hz);
         TEST_ASSERT_FALSE(scheduler.Run());
     }
 
     static void test_SchedulerRolloverOpposite(void) {
         unit_CNT = 0xFFFFFFFF;
-        Scheduler scheduler(default_hz);
+        libpropeller::Scheduler scheduler(default_hz);
         unit_CNT -= 1;
         TEST_ASSERT_TRUE(scheduler.Run());
     }
 
     static void test_SchedulerMedian(void) {
         //Test across the 0x80000000 boundary.
-        unit_CNT = 0x80000000 - Scheduler::GetTicksPerPeriod(default_hz);
-        Scheduler scheduler(default_hz);
+        unit_CNT = 0x80000000 - libpropeller::Scheduler::GetTicksPerPeriod(default_hz);
+        libpropeller::Scheduler scheduler(default_hz);
         TEST_ASSERT_FALSE(scheduler.Run());
     }
 
     static void test_SchedulerMedianOpposite(void) {
         unit_CNT = 0x80000000;
-        Scheduler scheduler(default_hz);
+        libpropeller::Scheduler scheduler(default_hz);
         unit_CNT = 0x7FFFFFFF;
 
         TEST_ASSERT_TRUE(scheduler.Run());
@@ -110,7 +110,7 @@ public:
 
     static void test_SchedulerNotCalledForMultiplePeriods(void) {
         unit_CNT = 0x0;
-        Scheduler scheduler(default_hz);
+        libpropeller::Scheduler scheduler(default_hz);
         TEST_ASSERT_FALSE(scheduler.Run());
         unit_CNT += (scheduler.GetTicksPerPeriod(default_hz) * 4) + 1;
         TEST_ASSERT_TRUE(scheduler.Run());
@@ -121,22 +121,3 @@ public:
     }
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

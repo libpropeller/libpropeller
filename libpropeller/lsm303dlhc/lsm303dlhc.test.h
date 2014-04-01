@@ -7,14 +7,14 @@ const int kSDAPin = 1;
 const int kSCLPin = 2;
 
 
-I2C * bus;
-LSM303DLHC acclMagn;
+libpropeller::I2C * bus;
+libpropeller::LSM303DLHC acclMagn;
 
 class UnityTests {
 public:
 
     static void setUp(void) {
-        bus = new I2C();
+        bus = new libpropeller::I2C();
         bus->Init(kSCLPin, kSDAPin);
         acclMagn.Init(bus);
     }

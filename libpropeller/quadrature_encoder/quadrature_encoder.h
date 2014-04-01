@@ -5,6 +5,8 @@
 
 extern char _load_start_quadrature_encoder_cog[];
 
+namespace libpropeller {
+
 /** 
  * This object stores encoder ticks in a signed 4 byte int sized 
  * variable. This means that there is some chance of overflow the encoder is
@@ -69,10 +71,11 @@ private:
     int cog;
 };
 
+}
 
 /*
  // This function is untested!
-int32_t QuadratureEncoder::Readdelta(int32_t Encid)
+int32_t libpropeller::QuadratureEncoder::Readdelta(int32_t Encid)
 {
   int32_t Deltapos = 0;
   Deltapos = ((0 + ((Encid < Totdelta) * (-((int32_t *)Pos)[((*(int32_t *)&dat[196]) + Encid)]))) + (((int32_t *)Pos)[((*(int32_t *)&dat[196]) + Encid)] = ((int32_t *)Pos)[Encid]));

@@ -11,6 +11,8 @@
 
 extern char _load_start_serial_cog[];
 
+namespace libpropeller {
+
 /** A high speed and high accuracy serial driver.
  * Based on Fast Full-Duplex Serial 1 (FFDS1) version 0.9 by Jonathan Dummer (lonesock). C++ Port done by SRLM.
  * 
@@ -359,9 +361,6 @@ private:
     }
 };
 
-
-
-
 //
 // The Put(buffer) function doesn't seem to work in CMM mode. In the tests, I 
 // get a -1 for the matching Get(), instead of the character sent. The same code
@@ -395,5 +394,7 @@ private:
 //	}
 //	return buffer_bytes;
 //}
+
+}
 
 #endif // LIBPROPELLER_SERIAL_H_

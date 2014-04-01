@@ -7,6 +7,8 @@
 
 #include "libpropeller/i2c/i2c_base.h"
 
+namespace libpropeller {
+
 /** A basic I2C driver.
  * 
  * All "device" fields should be the 7 bit address of the device, with the low bit set to 0 (the 7 addres bits are the upper bits). This applies to both the Put (write) and Get (read) cases.
@@ -36,7 +38,7 @@
 class I2C {
 public:
 
-    I2CBase base_;
+    libpropeller::I2CBase base_;
 
     /** Setup the DIRA, OUTA, and INA registers for scl and sda.
      * 
@@ -274,5 +276,7 @@ public:
     }
 
 };
+
+}
 
 #endif // LIBPROPELLER_I2C_H_

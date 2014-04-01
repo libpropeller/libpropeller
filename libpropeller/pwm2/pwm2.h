@@ -5,6 +5,8 @@
 #include <propeller.h>
 extern char _load_start_pwm2_cog[];
 
+namespace libpropeller {
+
 /** Run a high speed pulse width modulation (PWM) class that can output up to
  * two channels of duty cycled PWM at a single frequency.
  * 
@@ -130,5 +132,7 @@ private:
 
     static const int kDefaultFrequency = 12000;
 };
+
+}
 
 #endif // libpropeller_pwm2_h__

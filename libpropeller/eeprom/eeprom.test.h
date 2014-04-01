@@ -34,7 +34,7 @@ public:
     }
 
     static void test_SingleByteReadWrite(void) {
-        EEPROM mem;
+        libpropeller::EEPROM mem;
         mem.Init();
         unsigned short address = 0x8121 + addressOffset;
         char data = 0xA9 + dataOffset;
@@ -62,7 +62,7 @@ public:
     // Mode: LMM
 
     static void test_PageWriteSingleByteRead(void) {
-        EEPROM mem;
+        libpropeller::EEPROM mem;
         mem.Init();
         unsigned short address = 0x80F5 + addressOffset;
         int size = 500;
@@ -76,7 +76,7 @@ public:
     }
 
     static void test_PageReadWrite(void) {
-        EEPROM mem;
+        libpropeller::EEPROM mem;
         mem.Init();
         unsigned short address = 0x80F7 + addressOffset;
         int size = 500;
@@ -96,7 +96,7 @@ public:
     }
 
     static void test_PageReadDoesntBufferOverflow(void) {
-        EEPROM mem;
+        libpropeller::EEPROM mem;
         mem.Init();
         unsigned short address = 0x8223 + addressOffset;
         int size = 200;
@@ -113,7 +113,7 @@ public:
     }
 
     static void test_PutGetInt(void) {
-        EEPROM mem;
+        libpropeller::EEPROM mem;
         mem.Init();
         unsigned short address = 0x9B21 + addressOffset;
         int size = 4;
@@ -125,7 +125,7 @@ public:
     }
 
     static void test_PutGetShort(void) {
-        EEPROM mem;
+        libpropeller::EEPROM mem;
         mem.Init();
         unsigned short address = 0x965D + addressOffset;
         int size = 2;
@@ -136,5 +136,3 @@ public:
     }
 
 };
-
-

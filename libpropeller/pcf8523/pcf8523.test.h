@@ -6,8 +6,8 @@
 const int kPIN_I2C_SCL = 0;
 const int kPIN_I2C_SDA = 1;
 
-PCF8523 * sut;
-I2C * bus;
+libpropeller::PCF8523 * sut;
+libpropeller::I2C * bus;
 
 
 int startYear, startMonth, startDay, startHour, startMinute, startSecond;
@@ -16,9 +16,9 @@ class UnityTests {
 public:
 
     static void setUp(void) {
-        bus = new I2C;
+        bus = new libpropeller::I2C;
         bus->Init(kPIN_I2C_SCL, kPIN_I2C_SDA);
-        sut = new PCF8523();
+        sut = new libpropeller::PCF8523();
         sut->Init(bus);
     }
 
@@ -105,9 +105,7 @@ public:
     }
 
     static void test_GetStatusIsFalseForNoBus(void) {
-        PCF8523 dummy;
+        libpropeller::PCF8523 dummy;
         TEST_ASSERT_FALSE(dummy.GetStatus());
     }
 };
-
-

@@ -7,6 +7,8 @@
 #include "libpropeller/i2c/i2cMOCK.h"
 #endif
 
+namespace libpropeller {
+
 /** Provides an interface to the LSM303DLHC accelerometer and magnetometer.
  * 
  * "Output Data Rate, in digital-output accelerometers, defines the rate at which data is sampled. Bandwidth is the highest frequency signal that can be sampled without aliasing by the specified Output Data Rate. Per the Nyquist sampling criterion, bandwidth is half the Output Data Rate." -Analog Devices
@@ -60,7 +62,7 @@ public:
      * @param  i2cbus The bus that the LSM303DLHC is on.
      * @return        true when both devices are successfully initialized.
      */
-    bool Init(I2C * i2c_bus) {
+    bool Init(libpropeller::I2C * i2c_bus) {
         bus_ = i2c_bus;
 
         //Check to make sure the LSM303DLHC is actually there.
@@ -153,7 +155,7 @@ public:
     }
 
 private:
-    I2C * bus_;
+    libpropeller::I2C * bus_;
 
     bool status_;
 
@@ -174,5 +176,7 @@ private:
     const static unsigned char kGain_1_9 = 0b01000000;
     const static unsigned char kGain_1_3 = 0b00100000;
 };
+
+}
 
 #endif // LIBPROPELLER_LSM303DLHC_H_

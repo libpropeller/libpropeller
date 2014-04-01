@@ -5,6 +5,8 @@
 
 extern char _load_start_mcp3208_cog[];
 
+namespace libpropeller {
+
 /** MCP3208 8 channel ADC Class.
  * 
  * When the MCP3208 is configured for 3.3v operation each bit represents 0.00080566406v.
@@ -143,5 +145,7 @@ private:
         Cog = cognew(_load_start_mcp3208_cog, Ins) + 1;
     }
 };
+
+}
 
 #endif // LIBPROPELLER_MCP3208_H_

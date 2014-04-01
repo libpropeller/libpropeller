@@ -14,7 +14,7 @@ static const unsigned char Magn = 0b00111100;
 static const unsigned char BARO = 0b11101110;
 static const unsigned char Fuel = 0b01101100;
 
-I2C sut;
+libpropeller::I2C sut;
 
 int registerAddress = 4;
 int randomAddress = 0;
@@ -118,8 +118,5 @@ public:
         char indata1[data_size];
         TEST_ASSERT_TRUE(sut.Get(BARO, indata1, data_size));
     }
-
-
-
 
 };

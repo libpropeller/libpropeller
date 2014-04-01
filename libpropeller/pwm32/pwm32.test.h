@@ -8,17 +8,11 @@
 
 #include "libpropeller/board/board_unit_tester.h"
 
+libpropeller::PWM32 * sut;
+libpropeller::PulseWidthReader * pwr;
 
-
-PWM32 * sut;
-
-PulseWidthReader * pwr;
-
-
-
-
-const int outputPin = Board::kPinTie1a;
-const int inputPinMask = 1 << Board::kPinTie1b;
+const int outputPin = libpropeller::Board::kPinTie1a;
+const int inputPinMask = 1 << libpropeller::Board::kPinTie1b;
 
 class UnityTests {
 public:
@@ -32,10 +26,10 @@ public:
     }
 
     static void setUp(void) {
-        sut = new PWM32();
+        sut = new libpropeller::PWM32();
         sut->Start();
 
-        pwr = new PulseWidthReader();
+        pwr = new libpropeller::PulseWidthReader();
         pwr->Start(inputPinMask);
 
         waitcnt(CLKFREQ / 10 + CNT);
@@ -54,10 +48,10 @@ public:
     }
 
     static void helper_CheckWidths(const int highMicroseconds, const int lowMicroseconds) {
-        TEST_ASSERT_INT_WITHIN(PWM32::Resolution * 2 / 1000, highMicroseconds,
+        TEST_ASSERT_INT_WITHIN(libpropeller::PWM32::Resolution * 2 / 1000, highMicroseconds,
                 ClockCyclesToMicroseconds(pwr->getHighTime(0)));
 
-        TEST_ASSERT_INT_WITHIN(PWM32::Resolution * 2 / 1000, lowMicroseconds,
+        TEST_ASSERT_INT_WITHIN(libpropeller::PWM32::Resolution * 2 / 1000, lowMicroseconds,
                 ClockCyclesToMicroseconds(pwr->getLowTime(0)));
     }
 
@@ -138,6 +132,3 @@ public:
     }
 
 };
-
-
-

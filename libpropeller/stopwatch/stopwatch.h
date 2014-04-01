@@ -15,6 +15,8 @@ extern unsigned int unit_CNT;
 extern unsigned int unit_CLKFREQ;
 #endif
 
+namespace libpropeller {
+
 /** Utility class for timing event duration.
  * 
  * @warning The maximum time that can be recorded is (2^32/CLKFREQ) seconds. At
@@ -74,7 +76,6 @@ private:
 
 };
 
-
-
+}
 
 #endif // LIBPROPELLER_STOPWATCH_H_

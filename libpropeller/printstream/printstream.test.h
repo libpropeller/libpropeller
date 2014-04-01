@@ -22,9 +22,9 @@ const int rtspin = 21; //Output from Propeller (currently not used by driver, bu
 const int MAXTIME = 10; //maximum time (in milliseconds) to wait for GetCCheck for tests. Prevents hangups.
 
 
-Serial input;
-Serial output;
-PrintStream<Serial> * sut;
+libpropeller::Serial input;
+libpropeller::Serial output;
+libpropeller::PrintStream<libpropeller::Serial> * sut;
 
 class UnityTests {
 public:
@@ -37,7 +37,7 @@ public:
         
         input.GetFlush();
         
-        sut = new PrintStream<Serial>(&output);
+        sut = new libpropeller::PrintStream<libpropeller::Serial>(&output);
     }
     
     static void tearDown(void){

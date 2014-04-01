@@ -4,6 +4,10 @@
 #include <propeller.h>
 #include "libpropeller/i2c/i2c.h"
 
+class UnityTests;
+
+namespace libpropeller {
+
 /** Interface to the PCF8523 Real Time Clock (RTC).
  * 
  * Hardware connections: The PCF8523 should be connected to an I2C bus. If you 
@@ -62,7 +66,7 @@ public:
      * @return true if successfully initialized, false otherwise
      * 
      */
-    bool Init(I2C * newbus) {
+    bool Init(libpropeller::I2C * newbus) {
         bus_ = newbus;
         GetStatus();
         if (status_ == false) {
@@ -180,7 +184,7 @@ public:
 
 
 private:
-    I2C * bus_;
+    libpropeller::I2C * bus_;
     bool status_;
 
 
@@ -220,8 +224,9 @@ private:
     }
 
 public:
-    friend class UnityTests;
+    friend class ::UnityTests;
 };
 
+}
 
 #endif // LIBPROPELLER_PCF8523_H_

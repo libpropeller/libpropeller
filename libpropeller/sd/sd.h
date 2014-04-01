@@ -13,6 +13,8 @@
 //#define THROW_FALSE(value) {SetErrorCode((value)); return false;}
 #define THROW(value) {SetErrorCode((value)); return;}
 
+namespace libpropeller {
+
 /** FAT16/32 SD card interface.
  * 
  * This class is based on the Spin version of FSRW 2.6 by Rokicki and Lonesock. Thanks!
@@ -62,7 +64,7 @@
  */
 class SD : public OutputStream<SD> {
 public:
-    static const int kNoError = SDSafeSPI::kNoError;
+    static const int kNoError = libpropeller::SDSafeSPI::kNoError;
 
     // Mount Errors
     static const int kErrorNotFatVolume = -20;
@@ -83,16 +85,16 @@ public:
     static const int kErrorFileNotOpenForWriting = -27;
 
     // SdSafeSPI Errors
-    static const int kErrorCardNotReset = SDSafeSPI::kErrorCardNotReset;
-    static const int kError3v3NotSupported = SDSafeSPI::kError3v3NotSupported;
-    static const int kErrorOcrFailed = SDSafeSPI::kErrorOcrFailed;
-    static const int kErrorBlockNotLongAligned = SDSafeSPI::kErrorBlockNotLongAligned;
+    static const int kErrorCardNotReset = libpropeller::SDSafeSPI::kErrorCardNotReset;
+    static const int kError3v3NotSupported = libpropeller::SDSafeSPI::kError3v3NotSupported;
+    static const int kErrorOcrFailed = libpropeller::SDSafeSPI::kErrorOcrFailed;
+    static const int kErrorBlockNotLongAligned = libpropeller::SDSafeSPI::kErrorBlockNotLongAligned;
     // These errors are negated since they are thrown as negative in ASM section.
-    static const int kErrorAsmNoReadToken = -SDSafeSPI::kErrorAsmNoReadToken;
-    static const int kErrorAsmBlockNotWritten = -SDSafeSPI::kErrorAsmBlockNotWritten;
+    static const int kErrorAsmNoReadToken = -libpropeller::SDSafeSPI::kErrorAsmNoReadToken;
+    static const int kErrorAsmBlockNotWritten = -libpropeller::SDSafeSPI::kErrorAsmBlockNotWritten;
     // NOTE: errors -128 to -255 are reserved for reporting R1 response errors (SRLM ???)
-    static const int kErrorSpiEngineNotRunning = SDSafeSPI::kErrorSpiEngineNotRunning;
-    static const int kErrorCardBusyTimeout = SDSafeSPI::kErrorCardBusyTimeout;
+    static const int kErrorSpiEngineNotRunning = libpropeller::SDSafeSPI::kErrorSpiEngineNotRunning;
+    static const int kErrorCardBusyTimeout = libpropeller::SDSafeSPI::kErrorCardBusyTimeout;
 
     /** Stops the SPI driver cog.     
      */
@@ -488,7 +490,7 @@ public:
     }
 
     int PutFormatted(const char * formatString, ...) {
-        PrintStream<SD> ps(this);
+        libpropeller::PrintStream<SD> ps(this);
 
         va_list list;
         va_start(list, formatString);
@@ -716,7 +718,7 @@ private:
     static const int kDirectorySize = 32;
     static const int kDirectoryShift = 5;
 
-    SDSafeSPI sd_spi_;
+    libpropeller::SDSafeSPI sd_spi_;
 
     int current_cluster_;
     int total_filesize_;
@@ -1187,5 +1189,7 @@ private:
     }
 
 };
+
+}
 
 #endif // LIBPROPELLER_SD_H_

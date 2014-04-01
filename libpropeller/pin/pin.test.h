@@ -5,15 +5,15 @@
 #include "libpropeller/board/board_unit_tester.h"
 
 
-Pin * a = NULL;
-Pin * b = NULL;
+libpropeller::Pin * a = NULL;
+libpropeller::Pin * b = NULL;
 
 class UnityTests {
 public:
 
     static void setUp(void) {
-        a = new Pin(Board::kPinTie1a);
-        b = new Pin(Board::kPinTie1b);
+        a = new libpropeller::Pin(libpropeller::Board::kPinTie1a);
+        b = new libpropeller::Pin(libpropeller::Board::kPinTie1b);
     }
 
     static void tearDown(void) {

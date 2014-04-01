@@ -1,6 +1,8 @@
 #ifndef libpropeller_board_h_
 #define libpropeller_board_h_
 
+namespace libpropeller {
+
 namespace Board{
 
 
@@ -32,6 +34,8 @@ namespace Board{
 	
 	const int kPinUsbTx = 30;
 	const int kPinUsbRx = 31;
+
+}
 
 }
 

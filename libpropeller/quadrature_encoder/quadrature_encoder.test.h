@@ -4,13 +4,13 @@
 
 
 const int basePin = 9;
-QuadratureEncoder * sut;
+libpropeller::QuadratureEncoder * sut;
 
 class UnityTests {
 public:
 
     static void setUp(void) {
-        sut = new QuadratureEncoder();
+        sut = new libpropeller::QuadratureEncoder();
         printf("Started in cog: %i", sut->Start(9, 2));
         waitcnt(CLKFREQ / 10 + CNT);
     }
