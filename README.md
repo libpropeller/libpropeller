@@ -5,6 +5,9 @@ libpropeller is licensed under the MIT license.
 
 You can view the API documentation [here](https://rawgithub.com/libpropeller/libpropeller.docs/master/html/index.html).
 
+## Recent Changes
+* 2014-04-01: Added ``libpropeller`` as the namespace for all classes and fields. This is a breaking change; but one that's easy to integrate into existing code bases. Simply prepend all libpropeller class and variable names with ``libpropeller``. More information about namespaces can be found [here](http://www.cplusplus.com/doc/tutorial/namespaces/).
+
 ## Getting Started
 The easiest way to use libpropeller code in your project is to download the objects of interest to your project folder. Then, you can just include them in your .cpp files. Some objects (that take a seperate cog, usually) have an associated .S file that you'll have to include in your make file or on the command line.
 
