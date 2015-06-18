@@ -230,6 +230,9 @@ public:
 
             while ((rxbyte = CheckBuffer()) < 0);
             return (char) rxbyte;
+        } else if (timeout == 0){
+            // Optimization: no wait if we just want a check.
+            return CheckBuffer();
         } else {
             unsigned int total_cycles = (CLKFREQ / 1000) * timeout;
             unsigned int elapsed_cycles = 0;
@@ -341,7 +344,15 @@ private:
         if (rx_tail_ != rx_head_) {
             rxbyte = rx_buffer_[rx_tail_];
             rx_buffer_[rx_tail_] = 0;
-            rx_tail_ = ((rx_tail_ + 1) % kBufferLength);
+            
+            // Optimization:
+            // Was 
+            // rx_tail_ = ((rx_tail_ + 1) % kBufferLength);
+            // But the modulo MAY be very slow. Edit: it's a bit faster...
+            rx_tail_++;
+            if (rx_tail_ == kBufferLength) {
+                rx_tail_ = 0;
+            }
         }
         return rxbyte;
     }

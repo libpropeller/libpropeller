@@ -2,10 +2,10 @@
 #ifndef libpropeller_vnh2sp30_h__
 #define libpropeller_vnh2sp30_h__
 
-#include "pwm32/pwm32.h"
-#include "pwm2/pwm2.h"
+#include "libpropeller/pwm32/pwm32.h"
+#include "libpropeller/pwm2/pwm2.h"
 
-#include "pin/pin.h"
+#include "libpropeller/pin/pin.h"
 
 namespace libpropeller {
 

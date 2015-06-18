@@ -718,7 +718,7 @@ private:
     static const int kDirectorySize = 32;
     static const int kDirectoryShift = 5;
 
-    libpropeller::SDSafeSPI sd_spi_;
+    static libpropeller::SDSafeSPI sd_spi_;
 
     int current_cluster_;
     int total_filesize_;
@@ -1191,5 +1191,9 @@ private:
 };
 
 }
+
+#ifdef SINGLE_TRANSLATION_UNIT
+#include "sd.cpp"
+#endif
 
 #endif // LIBPROPELLER_SD_H_

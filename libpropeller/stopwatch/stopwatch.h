@@ -33,6 +33,9 @@ public:
      * 
      */
     Stopwatch() {
+        // Optimization: doing this in a loop really slows things down. So
+        // let's cut out the divide, and put in here in the constructor.
+        kCyclesPerMillisecond = CLKFREQ / 1000;
         Start(); //This call suppresses a warning.
         Reset();
     }
@@ -56,7 +59,7 @@ public:
      */
     int GetElapsed(void) const {
         if (started_ == true) {
-            return (CNT - start_CNT_) / (CLKFREQ / 1000);
+            return (CNT - start_CNT_) / kCyclesPerMillisecond;
         } else {
             return 0;
         }
@@ -73,6 +76,7 @@ public:
 private:
     unsigned int start_CNT_;
     bool started_;
+    int kCyclesPerMillisecond;
 
 };
 

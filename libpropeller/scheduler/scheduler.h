@@ -55,10 +55,15 @@ public:
      *
      * The function returns true for each time period, so if it is not called for
      * multiple time periods it returns true for each (up to hz times).
+     * 
+     * This function is set to always inline. Although it does increase code
+     * size by a few bytes (roughly 20 bytes per call location), it made some
+     * test code run 2x as fast.
      *
      * @returns true if the time period has passed, false otherwise.
      */
-    bool Run(void) {
+     
+    inline __attribute__((always_inline)) bool Run(void) {
         if ((CNT - start_CNT_) >= period_ticks_) {
             start_CNT_ += period_ticks_;
             return true;
